@@ -1,0 +1,240 @@
+{% extends "starshop-base.html" %}
+{% load static %}
+
+{% block title %}Звезда {{ flatpage.name }} в созвездии {{ flatpage.constellation }} | Звезда в Подарок - официальная регистрация имен звезд{% endblock %}
+
+{% block description %}Персональная страница звезды {{ flatpage.name }} в созвездии {{ flatpage.constellation }}. Полная информация о небесном теле. Имя звезды зарегестрировано в официальном международном каталоге IOASA.{% endblock %}
+
+{% block cart %}
+{% endblock %}
+
+{% block content %}
+    <section class="pp-first">
+        <div class="pp-first-wrapper">
+            <div class="pp-first-heading">
+                <div class="pp-first-image-heading">
+                    <a href="{% url 'promotions:home' %}"><img src="{% static 'img/logo.png' %}"></a>
+                    <h2 class="pp-owner">Владелец: {{ flatpage.owner }}</h2>
+                </div>
+                <div class="pp-first-heading-text">
+                    <h3>Звезда</h3>
+                    <h1>{{ flatpage.name }}</h1>
+                    <h2 class="pp-owner-mobile">Владелец: {{ flatpage.owner }}</h2>
+                </div>
+            </div>
+            <div class="pp-first-grid">
+                <div class="pp-first-card">
+                    <div class="pp-first-blue">
+                        <p class="pp-first-card-largetext">
+                            Идентификатор звезды в каталоге Дрейпера
+                        </p>
+                        <div class="pp-first-bluetext">
+                            <h4>{{ flatpage.draper }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="pp-first-card">
+                    <div class="pp-first-transparent">
+                        <p class="pp-first-card-largetext">
+                            Созвездие: {{ flatpage.constellation }}
+                        </p>
+                        <div class="pp-first-transparent-img">
+                            <img src="/static/img/{{ flatpage.constellation_img }}-first.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="pp-first-card">
+                    <div class="pp-first-transparent">
+                        <p class="pp-first-card-largetext">
+                            Класс: {{ flatpage.starclass }}
+                        </p>
+                        <div class="pp-first-transparent-img">
+                            <img src="/static/img/detail/{{ flatpage.starclass_img }}.png">
+                        </div>
+                    </div>
+                </div>
+                <div class="pp-first-card">
+                    <div class="pp-first-blue">
+                        <p class="pp-first-card-largetext">
+                            Присвоено имя в звёздном каталоге IOASA
+                        </p>
+                        <div class="pp-first-bluetext">
+                            <h4>{{ flatpage.name }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="pp-first-card" style="grid-column-start: 2; grid-column-end: span 2;">
+                    <div class="pp-first-orange">
+                        <p class="pp-first-card-orangetext">
+                            Видимая звёздная величина: <span class="pp-first-orangevalue">{{ flatpage.magnitude }}</span>
+                        </p>
+                        <p class="pp-first-card-orangetext">
+                            Абсолютная звёздная величина: <span class="pp-first-orangevalue">{{ flatpage.abs_magnitude }}</span>
+                        </p>
+                        <p class="pp-first-card-orangetext">
+                           Расстояние до звезды: <span class="pp-first-orangevalue">{{ flatpage.distance }}</span> световых лет
+                        </p>
+                    </div>
+                </div>
+                <div class="pp-first-card">
+                    <div class="pp-first-transparent-large">
+                        <img src="{% static 'img/psz-background-container-leftelement.png' %}">
+                        <p class="pp-first-card-smalltext">
+                            Спектр: <span class="pp-first-transparentvalue">{{ flatpage.spectrum }}</span>
+                        </p>
+                        <p class="pp-first-card-smalltext">
+                            Диаметр: <span class="pp-first-transparentvalue">{{ flatpage.diameter }}</span> астрономических единиц
+                        </p>
+                        <p class="pp-first-card-smalltext">
+                           Светимость: <span class="pp-first-transparentvalue">{{ flatpage.luminosity }}</span> солнечных
+                        </p>
+                        <p class="pp-first-card-smalltext">
+                           Температура: <span class="pp-first-transparentvalue">{{ flatpage.temperature }}</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="pp-first-card pp-first-telescope"  style="background-image: url('{{ flatpage.telescope1.url }}')">
+                    <img src="{% static 'img/psz-background-container.png' %}">
+                    <p>Источник: {{ flatpage.telescope1_label }}</p>
+                </div>
+                <div class="pp-first-card pp-first-telescope" style="background-image: url('{{ flatpage.telescope2.url }}')">
+                    <img src="{% static 'img/psz-background-container.png' %}">
+                    <p>Источник: {{ flatpage.telescope2_label }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="pp-coordinates">
+        <div class="pp-coordinates-heading">
+            <h1>Координаты звезды</h1>
+            <div class="pp-coordinates-heading-row">
+                <h3>Прямое восхождение: {{ flatpage.right_ascension }}</h3>
+                <h3>Склонение: {{ flatpage.declination }}</h3>
+            </div>
+        </div>
+        <div class="pp-coordinates-fullscreen">
+            <img class="pp-fullscreen-image" src="{{ flatpage.coordinates_fullscreen.url }}">
+            <img class="pp-forest" src="{% static 'img/psz-forest.png' %}">
+            <div class="pp-reticle distance-tooltip">
+                <img src="{% static 'img/psz-photo.png' %}">
+            </div>
+            <div class="pp-distance-information" id="distance_template">
+                <p class="pp-tooltip-text">{{ flatpage.distance }} световых лет от Земли</p>
+            </div>
+            <p class="pp-scale-fullscreen">
+                Масштаб 1:1
+            </p>
+        </div>
+        <div class="pp-coordinates-row">
+            <div class="pp-coordinates-1to1">
+                <img class="pp-1to1-image" src="{{ flatpage.coordinates_1to1.url }}">
+                <img class="pp-forest" src="{% static 'img/psz-forest.png' %}">
+                <div class="pp-reticle distance-tooltip">
+                    <img src="{% static 'img/psz-photo.png' %}">
+                </div>
+                <p class="pp-scale-1to1">
+                    Масштаб 1:1
+                </p>
+            </div>
+            <div class="pp-coordinates-column">
+                <div class="pp-coordinates-1to4">
+                    <img class="pp-1to4-image" src="{{ flatpage.coordinates_1to4.url }}">
+                    <div class="pp-reticle">
+                        <img src="{% static 'img/psz-photo.png' %}">
+                    </div>
+                    <p class="pp-scale-1to4">
+                        Масштаб 1:4
+                    </p>
+                </div>
+                <div class="pp-coordinates-1to8">
+                    <img class="pp-1to4-image" src="{{ flatpage.coordinates_1to8.url }}">
+                    <div class="pp-reticle">
+                        <img src="{% static 'img/psz-photo.png' %}">
+                    </div>
+                    <p class="pp-scale-1to4">
+                        Масштаб 1:8
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if flatpage.video %}
+    <section class="pp-video">
+        <iframe class="pp-youtube" src="{{ flatpage.video }}" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </section>
+    {% endif %}
+    <section class="pp-dossier">
+        <div class="pp-dossier-heading">
+            <h2>Досье звезды</h2>
+            <h1>{{ flatpage.name }} <br> ({{ flatpage.draper }})</h1>
+            <h2>В созвездии {{ flatpage.constellation }}</h2>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_1_img.url }}">
+            <div class="pp-dossier-text pp-left">
+                {{ flatpage.dossier_1_cn|safe }}
+            </div>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_2_img.url }}">
+            <div class="pp-dossier-text pp-right">
+                {{ flatpage.dossier_2_cn|safe }}
+            </div>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_3_img.url }}">
+            <div class="pp-dossier-text pp-left">
+                {{ flatpage.dossier_3_cn|safe }}
+            </div>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_4_img.url }}">
+            <div class="pp-dossier-text pp-right">
+                {{ flatpage.dossier_4_cn|safe }}
+            </div>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_5_img.url }}">
+            <div class="pp-dossier-text pp-left">
+                {{ flatpage.dossier_5_cn|safe }}
+            </div>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_6_img.url }}">
+            <div class="pp-dossier-text pp-right">
+                {{ flatpage.dossier_6_cn|safe }}
+            </div>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_7_img.url }}">
+            <div class="pp-dossier-text pp-left">
+                {{ flatpage.dossier_7_cn|safe }}
+            </div>
+        </div>
+        <div class="pp-dossier-card">
+            <img src="{{ flatpage.dossier_8_img.url }}">
+            <div class="pp-dossier-text pp-right">
+                {{ flatpage.dossier_8_cn|safe }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer_js%}
+<script src="{% static "js/personalpage.js" %}">
+</script>
+<script>
+
+    const distance_template = document.getElementById('distance_template');
+
+    tippy('.distance-tooltip', {
+        content: distance_template.innerHTML,
+        theme: 'distance',
+        placement: 'right',
+        arrow: true,
+        interactive: true,
+    });
+
+</script>
+{% endblock %}

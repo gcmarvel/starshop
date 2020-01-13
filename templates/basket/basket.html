@@ -1,0 +1,155 @@
+{% extends "starshop-base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% load thumbnail %}
+{% load currency_filters %}
+{% load purchase_info_tags %}
+{% load widget_tweaks %}
+
+{% load constellation_tags %}
+
+{% block title %}Звезда в Подарок | Корзина{% endblock %}
+{% block cart %}
+{% endblock %}
+
+{% block content %}
+<section class="basket">
+    <div class="basket-header">
+        <div class="basket-header-image">
+            <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+        </div>
+        <div class="basket-logo">
+            <div class="basket-logo-image">
+                <img src="{% static 'img/basket.png' %}">
+            </div>
+            <p>Корзина</p>
+        </div>
+    </div>
+
+    <h1 class="basket-heading">ЗВЁЗДЫ В КОРЗИНЕ</h1>
+
+{% if not basket.is_empty %}
+    <form action="." method="post" id="basket_formset">
+        {% csrf_token %}
+        {{ formset.management_form }}
+
+        {% for form in formset %}
+            {% with line=form.instance product=form.instance.product %}
+                {% purchase_info_for_line request line as session %}
+                <div class="basket-items">
+                    <div class="basket-line">
+                        <div class="basket-line-image">
+                            {{ form.id }}
+                            {% if product.product_class_id != 7 %}
+                            {% with image=product.primary_image %}
+                                {% thumbnail image.original "360x200" upscale=False as thumb %}
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <img src="{{ thumb.url }}" alt="{{ product.get_title }}"/>
+                                    </a>
+                                {% endthumbnail %}
+                            {% endwith %}
+                            {% else %}
+                            <a href="{{ product.get_absolute_url }}">
+                                <img src="{% static 'img/constructor-image.jpg' %}" alt="{{ product.get_title }}" />
+                            </a>
+                            {% endif %}
+                        </div>
+                        <div class="basket-line-text">
+                            <div class="basket-product-title">
+                                <h3><a href="{{ product.get_absolute_url }}">{{ line.description }}</a></h3>
+                            </div>
+                            <div class="basket-starclass">
+                                {% if product.product_class_id != 7 %}
+                                <div class="basket-starclass-image">
+                                    <img src="{% star_color product %}">
+                                </div>
+                                 <p>{{ product.product_class }}</p>
+                                {% else %}
+                                <div class="basket-starclass-image">
+                                    <img src="{% constructor_class product %}">
+                                </div>
+                                <p>{{ product.attr.starclass }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="basket-magnitude">
+                                 <p>Звёздная величина: {{ product.attr.magnitude }}</p>
+                            </div>
+                            <div class="basket-price">
+                                <p style="padding-bottom: 0.5vw">Цена:</p>
+                                <p>{{ line.line_price_excl_tax|currency:line.price_currency }}</p>
+                            </div>
+                            <div class="basket-starclass basket-constellation">
+                                {% if product.product_class_id != 7 %}
+                                <div class="basket-starclass-image">
+                                    <img src="/static/img/constructor/50/{% category_name product %}.png">
+                                </div>
+                                 <p>Созвездие: {% category_name product %} </p>
+                                {% else %}
+                                <div class="basket-starclass-image">
+                                    <img src="/static/img/constructor/50/{{ product.attr.constellation }}.png">
+                                </div>
+                                <p>Созвездие: {{ product.attr.constellation }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="basket-bundle">
+                                 <p>Подарочный набор: {% bundle product %}</p>
+                            </div>
+                            <div class="basket-delete">
+                                <a href="{% url 'basket:removefrombasket' line=line.id %}#basket_formset" >Х</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endwith %}
+        {% endfor %}
+    </form>
+
+    <div class=basket-lower-row>
+        {% block vouchers %}
+            {% if voucher_form %}
+                <div class="basket-voucher">
+                    <h2>Код купона на скидку</h2>
+                    <form id="voucher_form" action="{% url 'basket:vouchers-add' %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="code" maxlength="128" required="" id="id_code">
+                        <button type="submit" data-loading-text="Добавить">Добавить купон</button>
+                    </form>
+                </div>
+            {% endif %}
+        {% endblock vouchers %}
+
+        {% block baskettotals %}
+            <div class="basket-total">
+                <div class="basket-total-header">
+                    <h2>Всего</h2>
+                </div>
+                <div class="basket-total-number">
+                    <p>{{ order_total.incl_tax|currency:basket.currency }}</p>
+                </div>
+                <div class="basket-total-delivery">
+                    <img src="{% static 'img/deliv.png' %}">
+                    <p>Бесплатная доставка</p>
+                </div>
+            </div>
+        {% endblock baskettotals %}
+        {% block formactions %}
+        <div class="basket-proceed">
+            <a href="{% url 'checkout:index' %}"><button type="submit">Перейти к оформлению</button></a>
+        </div>
+        {% endblock formactions %}
+    </div>
+
+{% else %}
+    {% block emptybasket %}
+    <div class="basket-empty">
+        <p class="basket-empty-1">
+            Ваша корзина пуста!
+        </p>
+        <a href="{{ homepage_url }}#constellations-bg"><button class="basket-return">Выбрать звезду</button></a>
+    </div>
+    {% endblock %}
+{% endif %}
+
+</section>
+{% endblock content %}
+

@@ -1,0 +1,41 @@
+{% extends "starshop-base.html" %}
+{% load staticfiles %}
+
+
+{% block title %}
+    Адрес Доставки | Звезда в Подарок
+{% endblock %}
+
+
+{% block content %}
+<section class="basket checkout-email">
+    <div class="basket-header">
+        <div class="basket-header-image">
+            <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+        </div>
+        <a href="{% url 'checkout:message' %}">
+        <div class="checkout-name-star-back">
+            <div class="basket-logo-image">
+                <img src="{% static 'img/btn-back.png' %}">
+            </div>
+            <p>К предыдущему шагу</p>
+        </div>
+        </a>
+    </div>
+    <h1>Куда доставить заказ</h1>
+    <form action="." method="post" id="address-form">
+        {% csrf_token %}
+        <div class="checkout-address-form">
+            <table>
+            {{ form.as_table }}
+            </table>
+        </div>
+        <div class="checkout-email-button checkout-name-star-button">
+            <button type="submit">Оплатить</button>
+            <p>Нажимая кнопку "Оплатить" вы соглашаетесь с положениями <a href="{% url 'promotions:oferta' %}">Публичной оферты</a></p>
+        </div>
+    </form>
+</section>
+{% endblock %}
+
+

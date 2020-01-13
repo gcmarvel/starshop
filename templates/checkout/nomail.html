@@ -1,0 +1,20 @@
+{% extends 'starshop-base.html' %}
+{% load staticfiles %}
+{% block title %}Оставить заказ без почтового адреса | Звезда в Подарок {% endblock %}
+{% block content %}
+<section class="basket checkout-email">
+    <div class="basket-header-image">
+        <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+    </div>
+    <h1>Оставьте свой номер телефона и наш менеджер перезвонит вам!</h1>
+    <form action="." method="post">
+        {% csrf_token %}
+        <div class="checkout-email-input">
+            {{ form.phone }}
+        </div>
+        <div class="checkout-email-button">
+            <button type="submit">Отправить</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

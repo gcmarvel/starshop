@@ -1,0 +1,613 @@
+{% load staticfiles %}
+{% load constellation_tags %}
+{% load thumbnail %}
+{% load basket_tags %}
+{% load widget_tweaks %}
+
+<link rel="stylesheet" href="{% static "css/star-layouts/kozerog.css" %}">
+
+<div class="star-holder absolute" id="kozerog-star0">
+    <a href="{{ products.0.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.0 %}" class = "{% star_magnitude products.0 %} star-image" alt="{% category_name products.0 %} - звезда {{ products.0.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.0 %}">{{ products.0.title }}</p>
+</div>
+
+<div id="kozerog-star0-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.0.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.0 %}">{% star_class products.0 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.0.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.0.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.0 %} - звезда {{ products.0.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.0 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.0 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.0.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.0 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.0 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.0.id  %}#constellations-bg" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.0 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.0.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star0_template = document.getElementById('kozerog-star0-content')
+
+    tippy('#kozerog-star0', {
+        content: kozerog_star0_template.innerHTML,
+        theme: 'starshop',
+        placement: 'right',
+        arrow: true,
+        interactive: true,
+    })
+</script>
+
+
+
+
+<div class="star-holder absolute" id="kozerog-star1">
+    <a href="{{ products.1.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.1 %}" class = "{% star_magnitude products.1 %} star-image" alt="{% category_name products.1 %} - звезда {{ products.1.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.1 %}">{{ products.1.title }}</p>
+</div>
+
+<div id="kozerog-star1-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.1.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.1 %}">{% star_class products.1 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.1.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.1.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.1 %} - звезда {{ products.1.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.1 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.1 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.1.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.1 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.1 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.1.id  %}#constellations-bg" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.1 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.1.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star1_template = document.getElementById('kozerog-star1-content')
+
+    tippy('#kozerog-star1', {
+        content: kozerog_star1_template.innerHTML,
+        theme: 'starshop',
+        placement: 'left',
+        arrow: true,
+        interactive: true,
+    })
+</script>
+
+
+
+
+<div class="star-holder absolute" id="kozerog-star2">
+    <a href="{{ products.2.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.2 %}" class = "{% star_magnitude products.2 %} star-image" alt="{% category_name products.2 %} - звезда {{ products.2.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.2 %}">{{ products.2.title }}</p>
+</div>
+
+<div id="kozerog-star2-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.2.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.2 %}">{% star_class products.2 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.2.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.2.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.2 %} - звезда {{ products.2.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.2 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.2 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.2.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.2 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.2 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.2.id  %}#constellations-bg" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.2 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.2.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star2_template = document.getElementById('kozerog-star2-content')
+
+    tippy('#kozerog-star2', {
+        content: kozerog_star2_template.innerHTML,
+        theme: 'starshop',
+        placement: 'right',
+        arrow: true,
+        interactive: true,
+    })
+</script>
+
+
+
+
+<div class="star-holder absolute" id="kozerog-star3">
+    <a href="{{ products.3.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.3 %}" class = "{% star_magnitude products.3 %} star-image" alt="{% category_name products.3 %} - звезда {{ products.3.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.3 %}">{{ products.3.title }}</p>
+</div>
+
+<div id="kozerog-star3-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.3.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.3 %}">{% star_class products.3 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.3.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.3.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.3 %} - звезда {{ products.3.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.3 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.3 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.3.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.3 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.3 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.3.id  %}#constellations-bg" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.3 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.3.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star3_template = document.getElementById('kozerog-star3-content')
+
+    tippy('#kozerog-star3', {
+        content: kozerog_star3_template.innerHTML,
+        theme: 'starshop',
+        placement: 'left',
+        arrow: true,
+        interactive: true,
+    })
+</script>
+
+
+<div class="star-holder absolute" id="kozerog-star4">
+    <a href="{{ products.4.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.4 %}" class = "{% star_magnitude products.4 %} star-image" alt="{% category_name products.4 %} - звезда {{ products.4.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.4 %}">{{ products.4.title }}</p>
+</div>
+
+<div id="kozerog-star4-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.4.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.4 %}">{% star_class products.4 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.4.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.4.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.4 %} - звезда {{ products.4.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.4 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.4 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.4.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.4 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.4 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.4.id  %}#constellations-bg" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.4 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.4.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star4_template = document.getElementById('kozerog-star4-content')
+
+    tippy('#kozerog-star4', {
+        content: kozerog_star4_template.innerHTML,
+        theme: 'starshop',
+        placement: 'left',
+        arrow: true,
+        interactive: true,
+    })
+</script>
+
+
+<div class="star-holder absolute" id="kozerog-star5">
+    <a href="{{ products.5.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.5 %}" class = "{% star_magnitude products.5 %} star-image" alt="{% category_name products.5 %} - звезда {{ products.5.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.5 %}">{{ products.5.title }}</p>
+</div>
+
+<div id="kozerog-star5-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.5.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.5 %}">{% star_class products.5 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.5.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.5.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.5 %} - звезда {{ products.5.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.5 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.5 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.5.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.5 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.5 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.5.id  %}#constellations-bg" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.5 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.5.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star5_template = document.getElementById('kozerog-star5-content')
+
+    tippy('#kozerog-star5', {
+        content: kozerog_star5_template.innerHTML,
+        theme: 'starshop',
+        placement: 'right',
+        arrow: true,
+        interactive: true,
+    })
+</script>
+
+
+<div class="star-holder absolute" id="kozerog-star6">
+    <a href="{{ products.6.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.6 %}" class = "{% star_magnitude products.6 %} star-image" alt="{% category_name products.6 %} - звезда {{ products.6.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.6 %}">{{ products.6.title }}</p>
+</div>
+
+<div id="kozerog-star6-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.6.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.6 %}">{% star_class products.6 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.6.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.6.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.6 %} - звезда {{ products.6.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.6 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.6 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.6.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.6 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.6 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.6.id  %}#constellations-bg" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.6 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.6.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star6_template = document.getElementById('kozerog-star6-content')
+
+    tippy('#kozerog-star6', {
+        content: kozerog_star6_template.innerHTML,
+        theme: 'starshop',
+        placement: 'left',
+        arrow: true,
+        interactive: true,
+    })
+</script>
+
+
+
+<div class="star-holder absolute" id="kozerog-star7">
+    <a href="{{ products.7.get_absolute_url }}" class="star-link">
+        <img src = "{% star_color products.7 %}" class = "{% star_magnitude products.7 %} star-image" alt="{% category_name products.7 %} - звезда {{ products.7.title }}">
+    </a>
+    <p class="star-label" style="color: {% star_name_color products.7 %}">{{ products.7.title }}</p>
+</div>
+
+<div id="kozerog-star7-content" style="display: none;">
+    <div class = "row tooltip-header">
+        <div class="tooltip-title">{{ products.7.title }}</div>
+        <div class="tooltip-starclass" style="color: {% star_name_color products.7 %}">{% star_class products.7 %}</div>
+    </div>
+    <div class="relative">
+    {% with image=products.7.primary_image %}
+        {% thumbnail image.original "x115" upscale=False as thumb %}
+            <a href="{{ products.7.get_absolute_url }}">
+                <img src="{{ thumb.url }}" alt="{% category_name products.7 %} - звезда {{ products.7.title }}" class="thumbnail">
+            </a>
+        {% endthumbnail %}
+    {% endwith %}
+        <div class="absolute thumbnail-overlay">
+            <div class="row">
+                <div class="rounded-magnitude">{% star_magnitude_round products.7 %}</div>
+                <div class="magnitude-label">
+                    <p>Звездная</p>
+                    <p>величина</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>{% present products.7 %}</div>
+    <div class="tooltip-product-detail">
+        <a href="{{ products.7.get_absolute_url }}">Подробнее</a>
+    </div>
+    <div class="tooltip-price">
+        Цена: {% star_price products.7 %} 
+    </div>
+    <div class="row tooltip-buttons">
+        <div class="tooltip-basket-div">
+            {% basket_form request products.7 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:add' pk=products.7.id  %}#constellations-bg method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="tooltip-buy-div">
+            {% basket_form request products.7 as basket_form %}
+            <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=products.7.id  %}" method="post">
+                {% csrf_token %}
+                {% for field in basket_form %}
+                    {% render_field field %}
+                {% endfor %}
+                <button type="submit" class="tooltip-buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const kozerog_star7_template = document.getElementById('kozerog-star7-content')
+
+    tippy('#kozerog-star7', {
+        content: kozerog_star7_template.innerHTML,
+        theme: 'starshop',
+        placement: 'left',
+        arrow: true,
+        interactive: true,
+    })
+</script>

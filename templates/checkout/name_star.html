@@ -1,0 +1,76 @@
+{% extends "starshop-base.html" %}
+{% load staticfiles %}
+{% load constellation_tags %}
+{% load thumbnail %}
+
+
+{% block title %}
+    Назовите звезду | Звезда в Подарок
+{% endblock %}
+
+
+{% block content %}
+<section class="basket checkout-email">
+    <div class="basket-header">
+        <div class="basket-header-image">
+            <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+        </div>
+        <a href="{% url 'checkout:index' %}">
+        <div class="checkout-name-star-back">
+            <div class="basket-logo-image">
+                <img src="{% static 'img/btn-back.png' %}">
+            </div>
+            <p>К предыдущему шагу</p>
+        </div>
+        </a>
+    </div>
+    <h1>Назовите звезду</h1>
+    <form action="." method="post" id="name-star-form">
+        {% csrf_token %}
+
+        {{ form.management_form }}
+        {% for line, form in basket_and_formset %}
+            {% with product=line.product %}
+            <div class="checkout-name-star-line">
+
+                <div class="checkout-name-star-product-image">
+                    {% if product.product_class_id != 7 %}
+                        {% thumbnail product.get_all_images.1.original "440x400" upscale=False as thumb %}
+                        <img src="{{ thumb.url }}" alt="{{ product.get_title }}" />
+                        {% endthumbnail %}
+                    {% else %}
+                        <img src="{% constructor_class_big product %}" alt="{{ product.get_title }}" />
+                        <div class="star-show-name absolute" id="showname"></div>
+                    {% endif %}
+                </div>
+                <div class="checkout-name-star-product-text">
+                    <div class="checkout-email-input checkout-name-star-input">
+                        {{ form.name }}
+                        <div class="checkout-name-star-label">
+                            <p>Не более 50 символов</p>
+                        </div>
+                    </div>
+                    <div class="checkout-name-star-product-lowline">
+                    {% if product.product_class_id != 7 %}
+                        <p>{% star_class product %}: {{ product.title }}</p>
+                        <p>Созвездие: «{% category_name product %}»</p>
+                    {% else %}
+                        <p>{{ product.attr.starclass }}</p>
+                        <p>Созвездие: «{{ product.attr.constellation }}»</p>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+        {% endfor %}
+
+        <div class="checkout-email-button checkout-name-star-button">
+            <button type="submit">Отправить</button>
+        </div>
+    </form>
+</section>
+{% endblock %}
+
+{% block footer_js %}
+    <script src="{% static 'js/checkout_names.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,1405 @@
+{% extends "starshop-base.html" %}
+{% load staticfiles %}
+{% load basket_tags %}
+{% load django_tables2 %}
+{% load con_reviews_tags %}
+{% load constellation_tags %}
+{% load currency_filters %}
+
+{% block content %}
+<section class="section-first">
+    <video autoplay muted loop  id="background-video" >
+        <source src="{% static 'img/videobackground5.mp4' %}" type="video/mp4">
+    </video>
+    <video autoplay muted loop playsinline id="background-video-mobile" >
+        <source src="{% static 'img/videobackground-mob.mp4' %}" type="video/mp4">
+    </video>
+    <div class="first-wrapper">
+        <div class="first-row-1">
+            <div class="logo">
+                <a href="{% url 'promotions:home' %}"><img src="{% static 'img/logo.png' %}"></a>
+            </div>
+            <div class="nav-panel">
+                <ul>
+                    <li><a href="#constellations-bg">Назвать звезду</a></li>
+                    <li><img src="{% static 'img/vertical-line.png' %}"></li>
+                    <li><a href="#ioasa">IOASA</a></li>
+                    <li><img src="{% static 'img/vertical-line.png' %}"></li>
+                    <li><a href="{% url 'promotions:terms' %}">Условия</a></li>
+                    <li><img src="{% static 'img/vertical-line.png' %}"></li>
+                    <li><a href="#stories">Истории</a></li>
+                    <li><img src="{% static 'img/vertical-line.png' %}"></li>
+                    <li><a href="{% url 'promotions:reviews' %}">Отзывы</a></li>
+                    <li><img src="{% static 'img/vertical-line.png' %}"></li>
+                    <li><a href="#footer">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <img src="{% static 'img/menuicon.png' %}">
+            </div>
+            <div class="nav-mobile" id="nav-mobile">
+                <div class="nav-mobile-content">
+                    <span class="nav-close" id="nav-close">&times;</span>
+                    <div class="nav-text">
+                        <p><a href="#constellations-bg">Назвать звезду</a></p>
+                        <p><a href="#ioasa">IOASA</a></p>
+                        <p><a href="{% url 'promotions:terms' %}">Условия</a></p>
+                        <p><a href="#stories">Истории</a></p>
+                        <p><a href="{% url 'promotions:reviews' %}">Отзывы</a></p>
+                        <p><a href="#footer">Контакты</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="first-row-2">
+            <div class="first-center">
+                <div class="first-center-star">
+                    <img src="{% static 'img/planet_logo.png' %}">
+                </div>
+                <h1>ПОДАРИ ЗВЕЗДУ</h1>
+                <div class="first-center-description">
+                    <img src="{% static 'img/1partner.png' %}">
+                    <p>Международная организация по продвижению астрономичексих наук</p>
+                </div>
+            </div>
+        </div>
+        <div class="first-row-3">
+            <div class="motto">
+                <h2>САМЫЙ ЛУЧШИЙ ПОДАРОК НА ПЛАНЕТЕ ЗЕМЛЯ</h2>
+            </div>
+        </div>
+        <div class="first-row-4">
+            <div class="first-registration">
+                <p>Официальная регистрация имени звезды в международном звездном каталоге IOASA</p>
+            </div>
+        </div>
+        <div class="first-row-5">
+            <img src="{% static 'img/1partner.png' %}">
+            <p>Международная организация по продвижению астрономичексих наук</p>
+        </div>
+    </div>
+</section>
+<section class="section-catalogue" id="catalogue">
+    <div id="catalogue-table">
+    <h1>МЕЖДУНАРОДНЫЙ ЗВЁЗДНЫЙ КАТАЛОГ IOASA</h1>
+    <p>В каталог внесено более 6000 имен из более чем 75 стран мира</p>
+        {% if filter %}
+            <form action="#catalogue" method="get">
+                <input class="search-input" type="text" name="starid" placeholder="Введите ID Звезды" onclick="addHD(this)">
+                <button class="search-button">Поиск</button>
+            </form>
+        {% endif %}
+        {% render_table table %}
+    </div>
+</section>
+<section class="section-ioasa" id="ioasa">
+    <div class="ioasa-wrapper">
+        <div class="ioasa-registration">
+            <h1> <span class="ioasa-star"><img src="{% static 'img/iosa-star.png' %}"></span> Регистрация в международном звездном каталоге</h1>
+            <h2>Компания "Звезда в Подарок" является эксклюзивным представителем <span class="ioasa-tooltip-title" id="ioasa_information">IOASA<span class="ioasa-tooltip-sign"><img src="{%  static 'img/information.png' %}"></span></span> в России c правами регистрации
+                имен звезд в звездном каталоге. Полный список компаний-партнеров на сайте IOASA.</h2>
+            <p> Звездный каталог IOASA  - единственный открытый частный звездный каталог в мире. Каталог ежегодно
+                перевыпускается в количестве 2000 экземпляров и отправляется в крупнейшие университетские библиотеки.
+                В каталоге зафиксированы имена, послания и краткие характеристики звезд более чем 5000 человек из 75
+                стран мира.</p>
+        </div>
+        <div class="ioasa-information" id="ioasa_information_template">
+            <h1>IOASA</h1>
+            <div class="ioasa-line">
+                <img src="{% static 'img/ioasa-line.png' %}">
+            </div>
+            <p class="bold"> International Organization for Astronomical Science Advancement - это международная
+                некоммерческая благотворительная организация основанная в 1960 году и занимающаяся развитием и продвижением
+                наук о космосе в более чем 70 странах мира.</p>
+            <p> В 1999 году при содействии NASA и ESA был основан международный
+                частный каталог зве здных имен. Все отчисления за регистрацию звезд в полном объеме направляются на
+                благотворительные программы развития астрономических наук. Более подробно с деятельностью IOASA вы можете
+                ознакомиться на официальном сайте организации.</p>
+        </div>
+    </div>
+    <div class="book-image">
+        <img src="{% static 'img/starcatalogue.png' %}">
+    </div>
+    <div class="ioasa-sun-mobile">
+        <img src="{%  static 'img/ioasa-sun-mobile.png' %}">
+    </div>
+</section>
+<section class="section-bundle">
+
+    <div class="bundle-wrapper">
+        <div class="bundle-menu">
+            <div class="bundle-listbutton">
+                <img src="{% static 'img/nab-1.jpg'  %}" class="bundle-listbutton-img" id="nab-1" onclick="showBundle(this)">
+                <p class="bundle-eye">&#x1F441; Подробнее</p>
+            </div>
+            <div class="bundle-listbutton">
+                <img src="{% static 'img/nab-2.jpg'  %}" class="bundle-listbutton-img" id="nab-2" onclick="showBundle(this)">
+                <p class="bundle-eye">&#x1F441; Подробнее</p>
+            </div>
+            <div class="bundle-listbutton">
+                <img src="{% static 'img/nab-3.jpg'  %}" class="bundle-listbutton-img" id="nab-3" onclick="showBundle(this)">
+                <p class="bundle-eye">&#x1F441; Подробнее</p>
+            </div>
+            <div class="bundle-listbutton">
+                <img src="{% static 'img/nab-4.jpg'  %}" class="bundle-listbutton-img" id="nab-4" onclick="showBundle(this)">
+                <p class="bundle-eye">&#x1F441; Подробнее</p>
+            </div>
+            <div class="bundle-listbutton">
+                <img src="{% static 'img/nab-5active.jpg'  %}" class="bundle-listbutton-img" id="nab-5" onclick="showBundle(this)">
+                <p class="bundle-eye">&#x1F441; Подробнее</p>
+            </div>
+        </div>
+        <div class="bundle-content">
+            <h1 class="bundle-header">ЧТО ВХОДИТ В ПОДАРОЧНЫЙ КОМПЛЕКТ</h1>
+            <div class="bundle-card" id="nab-1-cn">
+                <div class="bundle-item bundle-star">
+                    <img src="{% static 'img/item1.png' %}">
+                    <p>Звезда девятой величины</p>
+                </div>
+                <div class="bundle-item bundle-registration">
+                    <img src="{% static 'img/item2.png' %}">
+                    <p>Регистрация звезды в международном звёздном каталоге IOASA</p>
+                </div>
+                <div class="bundle-item bundle-dossier">
+                    <img src="{% static 'img/item3.png' %}">
+                    <p>Электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-satfoto">
+                    <img src="{% static 'img/item4.png' %}">
+                    <p>Спутниковая фотография звезды</p>
+                </div>
+            </div>
+            <div class="bundle-card" id="nab-2-cn">
+                <div class="bundle-item bundle-star">
+                    <img src="{% static 'img/item1.png' %}">
+                    <p>Звезда восьмой величины</p>
+                </div>
+                <div class="bundle-item bundle-registration">
+                    <img src="{% static 'img/item2.png' %}">
+                    <p>Регистрация звезды в международном звёздном каталоге IOASA</p>
+                </div>
+                <div class="bundle-item bundle-dossier">
+                    <img src="{% static 'img/item3.png' %}">
+                    <p>Электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-satfoto">
+                    <img src="{% static 'img/item4.png' %}">
+                    <p>Спутниковая фотография звезды</p>
+                </div>
+                <div class="bundle-item bundle-certificate">
+                    <img src="{% static 'img/item5.png' %}">
+                    <p>Официальный сертификат в металлической рамке, подтверждающий владение звездой</p>
+                </div>
+                <div class="bundle-item bundle-qr-certificate">
+                    <img src="{% static 'img/item6.png' %}">
+                    <p>Сертификат QR-код с ссылкой на электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-scroll">
+                    <img src="{% static 'img/item7.png' %}">
+                    <p>Послание или пожелание на свитке с сургучной печатью</p>
+                </div>
+            </div>
+            <div class="bundle-card" id="nab-3-cn">
+                <div class="bundle-item bundle-star">
+                    <img src="{% static 'img/item1.png' %}">
+                    <p>Звезда седьмой величины</p>
+                </div>
+                <div class="bundle-item bundle-registration">
+                    <img src="{% static 'img/item2.png' %}">
+                    <p>Регистрация звезды в международном звёздном каталоге IOASA</p>
+                </div>
+                <div class="bundle-item bundle-dossier">
+                    <img src="{% static 'img/item3.png' %}">
+                    <p>Электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-satfoto">
+                    <img src="{% static 'img/item4.png' %}">
+                    <p>Спутниковая фотография звезды</p>
+                </div>
+                <div class="bundle-item bundle-certificate">
+                    <img src="{% static 'img/item5.png' %}">
+                    <p>Официальный сертификат в металлической рамке, подтверждающий владение звездой</p>
+                </div>
+                <div class="bundle-item bundle-qr-certificate">
+                    <img src="{% static 'img/item6.png' %}">
+                    <p>Сертификат QR-код с ссылкой на электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-scroll">
+                    <img src="{% static 'img/item7.png' %}">
+                    <p>Послание или пожелание на свитке с сургучной печатью</p>
+                </div>
+                <div class="bundle-item bundle-map">
+                    <img src="{% static 'img/item8.png' %}">
+                    <p>Светящаяся в темноте карта звёздного неба</p>
+                </div>
+                <div class="bundle-item bundle-video">
+                    <img src="{% static 'img/item9.png' %}">
+                    <p>Персональное видеопутешествие к звезде</p>
+                </div>
+            </div>
+            <div class="bundle-card" id="nab-4-cn">
+                <div class="bundle-item bundle-star">
+                    <img src="{% static 'img/item1.png' %}">
+                    <p>Звезда шестой величины</p>
+                </div>
+                <div class="bundle-item bundle-registration">
+                    <img src="{% static 'img/item2.png' %}">
+                    <p>Регистрация звезды в международном звёздном каталоге IOASA</p>
+                </div>
+                <div class="bundle-item bundle-dossier">
+                    <img src="{% static 'img/item3.png' %}">
+                    <p>Электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-satfoto">
+                    <img src="{% static 'img/item4.png' %}">
+                    <p>Спутниковая фотография звезды</p>
+                </div>
+                <div class="bundle-item bundle-certificate">
+                    <img src="{% static 'img/item5.png' %}">
+                    <p>Официальный сертификат в металлической рамке, подтверждающий владение звездой</p>
+                </div>
+                <div class="bundle-item bundle-qr-certificate">
+                    <img src="{% static 'img/item6.png' %}">
+                    <p>Сертификат QR-код с ссылкой на электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-scroll">
+                    <img src="{% static 'img/item7.png' %}">
+                    <p>Послание или пожелание на свитке с сургучной печатью</p>
+                </div>
+                <div class="bundle-item bundle-map">
+                    <img src="{% static 'img/item8.png' %}">
+                    <p>Светящаяся в темноте карта звёздного неба</p>
+                </div>
+                <div class="bundle-item bundle-video">
+                    <img src="{% static 'img/item9.png' %}">
+                    <p>Персональное видеопутешествие к звезде</p>
+                </div>
+                <div class="bundle-item bundle-ornament">
+                    <img src="{% static 'img/item10.png' %}">
+                    <p>Золотое обрамление записи в звездном каталоге</p>
+                </div>
+                <div class="bundle-item bundle-telescope">
+                    <img src="{% static 'img/item11.png' %}">
+                    <p>Любительский телескоп с 90-кратным увеличением</p>
+                </div>
+            </div>
+            <div class="bundle-card" id="nab-5-cn" style="display: grid">
+                <div class="bundle-item bundle-star">
+                    <img src="{% static 'img/item1.png' %}">
+                    <p>Звезда пятой величины</p>
+                </div>
+                <div class="bundle-item bundle-registration">
+                    <img src="{% static 'img/item2.png' %}">
+                    <p>Регистрация звезды в международном звёздном каталоге IOASA</p>
+                </div>
+                <div class="bundle-item bundle-dossier">
+                    <img src="{% static 'img/item3.png' %}">
+                    <p>Электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-satfoto">
+                    <img src="{% static 'img/item4.png' %}">
+                    <p>Спутниковая фотография звезды</p>
+                </div>
+                <div class="bundle-item bundle-certificate">
+                    <img src="{% static 'img/item5.png' %}">
+                    <p>Официальный сертификат в металлической рамке, подтверждающий владение звездой</p>
+                </div>
+                <div class="bundle-item bundle-qr-certificate">
+                    <img src="{% static 'img/item6.png' %}">
+                    <p>Сертификат QR-код с ссылкой на электронное досье звезды</p>
+                </div>
+                <div class="bundle-item bundle-scroll">
+                    <img src="{% static 'img/item7.png' %}">
+                    <p>Послание или пожелание на свитке с сургучной печатью</p>
+                </div>
+                <div class="bundle-item bundle-map">
+                    <img src="{% static 'img/item8.png' %}">
+                    <p>Светящаяся в темноте карта звёздного неба</p>
+                </div>
+                <div class="bundle-item bundle-video">
+                    <img src="{% static 'img/item9.png' %}">
+                    <p>Персональное видеопутешествие к звезде</p>
+                </div>
+                <div class="bundle-item bundle-ornament">
+                    <img src="{% static 'img/item10.png' %}">
+                    <p>Золотое обрамление записи в звездном каталоге</p>
+                </div>
+                <div class="bundle-item bundle-telescope">
+                    <img src="{% static 'img/item11.png' %}">
+                    <p>Любительский телескоп с 90-кратным увеличением</p>
+                </div>
+                <div class="bundle-item bundle-watches">
+                    <img src="{% static 'img/item12.png' %}">
+                    <p>Оригинальные наручные часы бренда КОСМОС</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-star">
+        <h3>Звёздная величина характеризует яркость звезды</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p> Чем меньше звёздная величина, тем отчетливее она видна наблюдателю на небосклоне. Звезды пятой и шестой
+        величины можно увидеть невооруженным глазом, а звёзды большей величины только с помощью бинокля или телескопа.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-registration">
+        <h3>Запись о вашей звезде в электронном и бумажном каталоге IOASA</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>В каталог вносятся имена звезды и владельца, а также характеристика небесного тела и его координаты.
+            В электронный каталог информация вносится в течение трёх дней. Более подробная информация о зарегестрированных
+            звездах печатается в ежегодном бумажном каталоге, который можно найти в библиотеках крупнейших учебных заведений
+            мира.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-dossier">
+        <h3>Подробная персональная страница вашей звезды</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Ваша личная страница с подробным описанием и астрометрическими характеристиками вашей звезды. На странице вы также найдете
+        понятную инфографику с точным указанием местоположения звезды на звёздном небе, описание класса и типа звезды и
+        изображения звезды, сделанные с помошью компьютерного моделирования.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-satfoto">
+        <h3>Настоящая фотография вашей звезды</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Подлинное изображение звезды, сделанное одним из существующих орбитальных телескопов. Фотография публикуется в электронном
+        досье звезды.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-certificate">
+        <h3>Официальный международный сертификат с указанием имени звезды и ее характеристик на двух языках</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Сертификат авторской работы, выполненный в стильной рамке, подойдет любому интерьеру и будет всегда напоминать о дарящем.
+            Все владельцы сертификатов, а также их звезды ежегодно печатаются в международном звездном каталоге IOASA.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-qr-certificate">
+        <h3>Фоторамка с изображением звезды и QR-кодом, ведущим на ее персональную страницу</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Стилизизованный QR-код в металлической рамке на фоне уникального изображения вашей звезды.
+             Наведите камеру вашего смартфона на изображение и на экране появится полная и подробная информация о принадлежащем
+            Вам небесном светиле. Это приятное дополнение к подарку, которое удивит любого человека. </p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-scroll">
+        <h3>Ваше личное пожелание на антикварном свитке</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Оставьте послание дорогому вам человеку. Поздравьте, пожелайте или сделайте признание, ваша фантазия ничем не ограничена.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-map">
+        <h3>Фирменная настенная астрономическая звёздного неба, которая светится в темноте</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Благодаря специальному покрытию карта накапливает свет днем и излучает приятное сине-зеленое свечение в темное время суток.
+            Можно бесконечно долго смотреть на далекие звезды и их невероятный завораживающий магический свет.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-video">
+        <h3>Уникальное и реалистичное путешествие от Земли до Вашей звезды</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Путешествие до вашей звезды через пространство и время на сверхсветовых скоростях. Достоверное трехмерное моделирование космического перелета,
+            составленное вручную сотрудниками нашей компании.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-ornament">
+        <h3>Самые яркие звёзды в электронном каталоге выделяются среди остальных</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Воспользуйся элегантным способом подчеркнуть особое положение владельца звезды</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-telescope">
+        <h3>Интересный и познавательный инструмент, который украсит ваши вечера</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Телескоп для наблюдений за звёздным небом в удобном противоударном кейсе. 90 - кратное
+            увеличение позолит вам легко наблюдать любые космические объекты до 10 звёздной величины.
+            Почуствуйте себя настоящим астрономом наблюдая за звёздами и планетами в удобный и простой в
+            настройке телескоп - рефрактор.</p>
+    </div>
+
+    <div class="bundle-tooltip" id="bundle-watches">
+        <h3>Оригинальные часы всемирно известного российского бренда КОСМОС</h3>
+        <div class="ioasa-line">
+            <img src="{% static 'img/ioasa-line.png' %}">
+        </div>
+        <p>Тонкий и элегантный корпус, изогнутый циферблат, защищенный минеральным стеклом, и высокоточные японские
+            механизмы - это неизменные характеристики часов бренда КОСМОС, благодаря которым они
+            превосходят по качеству даже популярные швейцарские модели. Часы КОСМОС - это подарок,
+            которого достойны только самые лучшие.</p>
+    </div>
+
+</section>
+
+<section class="constellation-section" id="constellations-bg">
+    <div class="constellation-header"><h1>Чтобы подарить звезду нажмите на созвездие</h1></div>
+
+    <div class="constellations-bg">
+        <div id="constellation-wrapper" class="container constellations">
+            <div class="inline relative">
+                <img src="{% static "/img/phoenix-first.png" %}" id="phoenix" class="constellationimg" alt="Созвездие Феникс" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Феникс</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "/img/delphinus-first.png" %}" id="delphinus" class="constellationimg" alt="Созвездие Дельфин" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Дельфин</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/aquarius-first.png" %}" id="aquarius" class="constellationimg" alt="Созвездие Водолей" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Водолей</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/lynx-first.png" %}" id="lynx" class="constellationimg" alt="Созвездие Рысь" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Рысь</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/orion-first.png" %}" id="orion" class="constellationimg" alt="Созвездие Орион" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Орион</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/aries-first.png" %}" id="aries" class="constellationimg" alt="Созвездие Овен" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Овен</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/cygnus-first.png" %}" id="cygnus" class="constellationimg" alt="Созвездие Лебедь" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Лебедь</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/capricorn-first.png" %}" id="capricorn" class="constellationimg" alt="Созвездие Козерог" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Козерог</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/taurus-first.png" %}" id="taurus" class="constellationimg" alt="Созвездие Телец" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Телец</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/lupus-first.png" %}" id="lupus" class="constellationimg" alt="Созвездие Волк" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Волк</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/pegasus-first.png" %}" id="pegasus" class="constellationimg" alt="Созвездие Пегас" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Пегас</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/aquilla-first.png" %}" id="aquilla" class="constellationimg" alt="Созвездие Орёл" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Орёл</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/lyra-first.png" %}" id="lyra" class="constellationimg" alt="Созвездие Лира" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Лира</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/sagittarius-first.png" %}" id="sagittarius" class="constellationimg" alt="Созвездие Стрелец" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Стрелец</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/cancer-first.png" %}" id="cancer" class="constellationimg" alt="Созвездие Рак" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Рак</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/corvus-first.png" %}" id="corvus" class="constellationimg" alt="Созвездие Ворон" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Ворон</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/virgo-first.png" %}" id="virgo" class="constellationimg" alt="Созвездие Дева" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Дева</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/pisces-first.png" %}" id="pisces" class="constellationimg" alt="Созвездие Рыбы" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Рыбы</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/monoceros-first.png" %}" id="monoceros" class="constellationimg" alt="Созвездие Единорог" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Единорог</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/scorpio-first.png" %}" id="scorpio" class="constellationimg" alt="Созвездие Скорпион" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Скорпион</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/libra-first.png" %}" id="libra" class="constellationimg" alt="Созвездие Весы" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Весы</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/gemini-first.png" %}" id="gemini" class="constellationimg" alt="Созвездие Близнецы" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Близнецы</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/leo-first.png" %}" id="leo" class="constellationimg" alt="Созвездие Лев" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Лев</div>
+            </div>
+            <div class="inline relative">
+                <img src="{% static "img/draco-first.png" %}" id="draco" class="constellationimg" alt="Созвездие Дракон" onclick="scaleConstellations(this.id)" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Дракон</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fullconstellation-background" id="phoenix-full-bg">
+        <div class = "fullconstellation" id="phoenix-full">
+            <div class="backtolist" onclick="unscaleConstellations('phoenix')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Феникс"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Феникс<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Феникс" %}
+            <img src="{% static "img/phoenix-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+
+    <div class="fullconstellation-background" id="delphinus-full-bg">
+        <div class = "fullconstellation" id="delphinus-full">
+            <div class="backtolist" onclick="unscaleConstellations('delphinus')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Дельфин"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Дельфин<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Дельфин" %}
+            <img src="{% static "img/delphinus-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+
+    <div class="fullconstellation-background" id="aquarius-full-bg">
+        <div class = "fullconstellation" id="aquarius-full">
+            <div class="backtolist" onclick="unscaleConstellations('aquarius')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Водолей"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Дельфин<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Водолей" %}
+            <img src="{% static "img/aquarius-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="lynx-full-bg">
+        <div class = "fullconstellation" id="lynx-full">
+            <div class="backtolist" onclick="unscaleConstellations('lynx')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Рысь"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Рысь<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Рысь" %}
+            <img src="{% static "img/lynx-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="orion-full-bg">
+        <div class = "fullconstellation" id="orion-full">
+            <div class="backtolist" onclick="unscaleConstellations('orion')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Орион"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Орион<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Орион" %}
+            <img src="{% static "img/orion-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="aries-full-bg">
+        <div class = "fullconstellation" id="aries-full">
+            <div class="backtolist" onclick="unscaleConstellations('aries')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Овен"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Овен<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Овен" %}
+            <img src="{% static "img/aries-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="cygnus-full-bg">
+        <div class = "fullconstellation" id="cygnus-full">
+            <div class="backtolist" onclick="unscaleConstellations('cygnus')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Лебедь"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Лебедь<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Лебедь" %}
+            <img src="{% static "img/cygnus-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="capricorn-full-bg">
+        <div class = "fullconstellation" id="capricorn-full">
+            <div class="backtolist" onclick="unscaleConstellations('capricorn')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Козерог"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Козерог<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Козерог" %}
+            <img src="{% static "img/capricorn-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="taurus-full-bg">
+        <div class = "fullconstellation" id="taurus-full">
+            <div class="backtolist" onclick="unscaleConstellations('taurus')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Телец"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Телец<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Телец" %}
+            <img src="{% static "img/taurus-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="lupus-full-bg">
+        <div class = "fullconstellation" id="lupus-full">
+            <div class="backtolist" onclick="unscaleConstellations('lupus')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Волк"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Волк<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Волк" %}
+            <img src="{% static "img/lupus-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="pegasus-full-bg">
+        <div class = "fullconstellation" id="pegasus-full">
+            <div class="backtolist" onclick="unscaleConstellations('pegasus')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Пегас"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Пегас<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Пегас" %}
+            <img src="{% static "img/pegasus-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="aquilla-full-bg">
+        <div class = "fullconstellation" id="aquilla-full">
+            <div class="backtolist" onclick="unscaleConstellations('aquilla')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Орёл"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Орёл<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Орёл" %}
+            <img src="{% static "img/aquilla-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="lyra-full-bg">
+        <div class = "fullconstellation" id="lyra-full">
+            <div class="backtolist" onclick="unscaleConstellations('lyra')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Лира"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Лира<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Лира" %}
+            <img src="{% static "img/lyra-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="sagittarius-full-bg">
+        <div class = "fullconstellation" id="sagittarius-full">
+            <div class="backtolist" onclick="unscaleConstellations('sagittarius')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Стрелец"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Стрелец<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Стрелец" %}
+            <img src="{% static "img/sagittarius-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="cancer-full-bg">
+        <div class = "fullconstellation" id="cancer-full">
+            <div class="backtolist" onclick="unscaleConstellations('cancer')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Рак"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Рак<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Рак" %}
+            <img src="{% static "img/cancer-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="corvus-full-bg">
+        <div class = "fullconstellation" id="corvus-full">
+            <div class="backtolist" onclick="unscaleConstellations('corvus')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Ворон"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Ворон<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Ворон" %}
+            <img src="{% static "img/corvus-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="virgo-full-bg">
+        <div class = "fullconstellation" id="virgo-full">
+            <div class="backtolist" onclick="unscaleConstellations('virgo')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Дева"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Дева<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Дева" %}
+            <img src="{% static "img/virgo-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="pisces-full-bg">
+        <div class = "fullconstellation" id="pisces-full">
+            <div class="backtolist" onclick="unscaleConstellations('pisces')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Рыбы"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Рыбы<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Рыбы" %}
+            <img src="{% static "img/pisces-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="monoceros-full-bg">
+        <div class = "fullconstellation" id="monoceros-full">
+            <div class="backtolist" onclick="unscaleConstellations('monoceros')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Единорог"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Единорог<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Единорог" %}
+            <img src="{% static "img/monoceros-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="scorpio-full-bg">
+        <div class = "fullconstellation" id="scorpio-full">
+            <div class="backtolist" onclick="unscaleConstellations('scorpio')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Скорпион"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Скорпион<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Скорпион" %}
+            <img src="{% static "img/scorpio-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="libra-full-bg">
+        <div class = "fullconstellation" id="libra-full">
+            <div class="backtolist" onclick="unscaleConstellations('libra')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Весы"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Весы<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Весы" %}
+            <img src="{% static "img/libra-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="gemini-full-bg">
+        <div class = "fullconstellation" id="gemini-full">
+            <div class="backtolist" onclick="unscaleConstellations('gemini')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Близнецы"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Близнецы<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Близнецы" %}
+            <img src="{% static "img/gemini-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="leo-full-bg">
+        <div class = "fullconstellation" id="leo-full">
+            <div class="backtolist" onclick="unscaleConstellations('leo')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Лев"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Лев<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Лев" %}
+            <img src="{% static "img/leo-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+    <div class="fullconstellation-background" id="draco-full-bg">
+        <div class = "fullconstellation" id="draco-full">
+            <div class="backtolist" onclick="unscaleConstellations('draco')">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии Дракон"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </div>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>Дракон<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name "Дракон" %}
+            <img src="{% static "img/draco-full.png" %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+
+
+</section>
+
+{% include "constructor.html" %}
+
+<section class="stories" id="stories">
+
+    <div class="stories-wrapper">
+        <div class="ribbon">
+            <img src="{% static 'img/ribbon.png' %}" alt="История подарка от компании Звезда в Подарок">
+        </div>
+        <div class="story-arrow story-arrow-left">
+            <img src="{% static 'img/arrow_mob.png' %}" onclick=prevstory()>
+        </div>
+        <div class="story-arrow story-arrow-right">
+            <img src="{% static 'img/arrow_mob.png' %}" onclick=nextstory()>
+        </div>
+        <div class="stories-menu">
+            <p id="story-1" style="background: rgb(25, 52, 167); color: white;" onclick="chooseStory(this.id)">Необычное предложение</p>
+            <p id="story-2" onclick="chooseStory(this.id)">Знак судьбы</p>
+            <p id="story-3" onclick="chooseStory(this.id)">Алиса</p>
+            <p id="story-4" onclick="chooseStory(this.id)">Настоящий герой</p>
+            <p id="story-5" onclick="chooseStory(this.id)">Орион</p>
+            <p id="story-6" onclick="chooseStory(this.id)">Родная звезда</p>
+            <p id="story-7" onclick="chooseStory(this.id)">Близнецы</p>
+            <div class="stories-menu-footer">
+                <p>
+                    Хотите, чтобы ваша история подарка была на нашем сайте? <br> Вы можете написать нам
+                </p>
+                <div class="send-story-wrapper">
+                    <button  class="send-story" value="Прислать историю" id="SendStoryBtn">Прислать историю</button>
+                     <div id="SendStoryModal" class="constructor-modal">
+                        <div class="constructor-modal-content">
+                             <form id="constructor-form" method="post">
+                                {%  csrf_token %}
+                                <span class="constructor-modal-close" id="SendStoryClose">&times;</span>
+                                 <h1 class="sendstory-heading">Отправьте свою историю подарка!</h1>
+                                <div class="sendstory-email">
+                                    {{ form.email }}
+                                </div>
+                                 <div class="sendstory-story">
+                                    {{ form.story }}
+                                </div>
+                                <div class="sendstory-button">
+                                    <button type="submit">Отправить</button>
+                                </div>
+                            </form>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="stories-content">
+            <div id="cn-story-1" class="storycn" style="display: block">
+                <div class="storycn-content">
+                    <h1>Необычное предложение</h1>
+                    <p>С Олегом мы встречались уже 2 года и решили отметить эту круглую дату поездкой на море.
+                        Это был замечательный день, мы провалялись на пляже и делали шоколадное фондю на песке. Поднялся
+                        сильный ветер и нам пришлось спрятаться в небольшом съемном домике на берегу, где после дневной жары
+                        и долгого дня меня потянуло спать. <br><br>
+                        Я проснулась через два часа, Олега нигде не было рядом. Уже темнело,
+                        я пошла искать его на пляж. Олег расставлял на песке свечи, готовил мне сюрприз. Мы сели на холодном
+                        песке и любовались морем, лунный свет создавал удивительные фигуры на воде. Олег неожиданно показал на
+                        звезды и достал из рюкзака коробочку. Я попыталась догадаться, что в ней, но реальность превзошла
+                        мои ожидания: мне подарили звезду. Мы раньше говорили о том, как здорово было бы иметь свою звезду,
+                        но я никогда всерьез не задумывалась, что можно дать звезде имя. <br><br>
+                        Но настоящий сюрприз ждал меня
+                        дальше: на листке с пожеланием Олег сделал мне предложение. Мы женаты уже год, и я вспоминаю этот день
+                        как самый счастливый день в своей жизни.</p>
+                </div>
+            </div>
+            <div id="cn-story-2" class="storycn">
+                <div class="storycn-content">
+                    <h1>Знак судьбы</h1>
+                    <p>Лёва родился 23 июля, в первый день Льва по гороскопу. Вся моя жизнь была так или иначе связана с
+                        львами, мой муж - Лев, поэтому я не удивилась, что мой сын - тоже. Когда он родился, мне хотелось
+                        как-нибудь запечатлеть этот момент, но все традиционные подарки - слепок ручки или серебряная ложка
+                        - казались мне незначительными и мелочными.<br><br>
+                        Решение купить звезду пришло не сразу. Я знала, что
+                        существуют звездные каталоги, что можно назвать звезду, но не знала насколько все это официально и
+                        думала, что это очень дорого. Мой муж убедил меня поискать достойный каталог в интернете, и так я
+                        нашла этот сайт. Первое что меня порадовало - цены оказались значительно ниже, чем я предполагала.<br><br>
+                        Мы выбрали звезду - оранжевый гигант в созвездии Льва - и назвали ее "Puer Lucum", что означает
+                        "Дитя Света". Теперь каждый раз, когда я гляжу на небо, я улыбаюсь, потому что знаю, что у моего
+                        сына есть своя путеводная звезда.</p>
+                </div>
+            </div>
+            <div id="cn-story-3" class="storycn">
+                <div class="storycn-content">
+                    <h1>Алиса</h1>
+                    <p>Я был тайно влюблен в Алису с девятого класса, когда она пришла в нашу школу. Ее отец, военный по
+                        профессии, был распределен в наш город из другой области. Я не могу объяснить как и почему, но уже
+                        через неделю все мои мысли были только о ней.<br><br>
+                        Больше года я старался не подавать виду, тайно изучал
+                        ее страницу Вконтакте, пытался узнать, что ей нравится. Наконец, я решился пригласить ее на свидание.
+                        К моему счастливому удивление она согласилась, с этого момента моя жизнь круто изменилась и я,
+                        наконец-то, почувствовал себя счастливым. На третье свидание я решился на необычное: подарить звезду.
+                        Я понимаю, что фактически невозможно владеть звездой, но можно дать звезде имя в каком-нибудь звездном
+                        каталоге.<br><br>
+                        Алиса улыбалась, подарок ей понравился, никто ничего подобного ей никогда не дарил, я
+                        улыбался тоже. Пускай это и просто глупый символ, но ненадолго я смог сделать свою девушку счастливый,
+                        и если вы меня спросите, то я вам отвечу, что это того стоило.</p>
+                </div>
+            </div>
+            <div id="cn-story-4" class="storycn">
+                <div class="storycn-content">
+                    <h1>Настоящий герой</h1>
+                    <p>Что подарить Маме? Отец ушел от нас с братом когда мне было 6 лет. Мама тянула нас одна, работая в
+                        две смены в магазине. Я вырос, пошел в институт, получил техническую специальность, все только
+                        благодаря ей.<br><br>
+                        Мы с братом основали свою компанию и потихоньку стали продвигаться на рынке и сейчас
+                        являемся дистрибьюторами электронных товаров в более чем 20 регионах России.  Мама всегда говорила,
+                        что у нас с братом есть своя путеводная звезда, она никогда не теряла надежды вырастить нас
+                        достойными людьми.<br><br>
+                        На ее 65-летие я решил сделать ей особенный подарок - подарить звезду. В своей
+                        жизни я встречал много людей, хороших и не очень, но моя мать - настоящий герой. Она одна из
+                        немногих, кто достойна своей звезды на небосклоне.</p>
+                </div>
+            </div>
+            <div id="cn-story-5" class="storycn">
+                <div class="storycn-content">
+                    <h1>Орион</h1>
+                    <p>Наша компания занимается производством оптики для биноклей и телескопов уже более 30 лет. Мы всегда
+                        стараемся поздравлять наших сотрудников со знаменательными датами и событиями, и выбираем подарок
+                        для каждого, учитывая его дела, мечты и личные качества.<br><br>
+                        Вечером, если вы пройдете мимо нашего
+                        производственного корпуса, то увидите, что из открытого окна на последнем этаже на звезды указывает
+                        полупрофессиональный четырехметровый телескоп. Это кабинет Виктора Юрьевича Шапошникова, начальника
+                        производственного цеха, а также замечательного, отзывчивого руководителя и поклонника астрономии.
+                        Виктор Юрьевич работает с нами уже более 25 лет, он начинал как обычный рабочий цеха, но со временем
+                        усердность, трудолюбие и огромный опыт привели его к руководящей должности. На пятидесятилетний
+                        юбилей Виктора Юрьевича наш коллектив решил сделать ему подарок, подходящий его статусу - подарить
+                        звезду в созвездии Орион.<br><br>
+                        Уважаемый Виктор Юрьевич, вы не просто наш руководитель, вы талантливый
+                        организатор и лидер, сплотивший в одно целое наш дружный коллектив. Желаем вам счастья, успеха,
+                        процветания, долгих лет жизни и всегда оставаться с нами. С праздником вас!</p>
+                </div>
+            </div>
+            <div id="cn-story-6" class="storycn">
+                <div class="storycn-content">
+                    <h1>Родная звезда</h1>
+                    <p>Я помню как в детстве мы с моей сестрой, Катей, дрались на подушках и случайно разбили настольную
+                        лампу. Мы после этого спрятались в шкафу и перепуганные родители искали нас более получаса. Здорово
+                        нам тогда досталось. <br><br>
+                        Мы, конечно, много ругались и дрались, как и все братья и сестры, но и всегда
+                        поддерживали друг друга в сложные моменты жизни. Моей сестре сейчас 26 и она выходит замуж. Когда
+                        ей было 10 лет, она мечтала путешествовать от звезды к звезде в маленьком космическом корабле,
+                        увидела в каком-то мультфильме. Потом, когда ей исполнилось 14 лет, она стала невыносимой, и я
+                        постоянно подшучивал над ней, называл "звезданутой".<br><br>
+                        Но и это время прошло, мы сейчас лучшие друзья,
+                        и я решил ей подарить на свадьбу звезду. Ее жизнь круто меняется, и я надеюсь, она никогда не
+                        забудет о том, какими мы были в детстве.</p>
+                </div>
+            </div>
+            <div id="cn-story-7" class="storycn">
+                <div class="storycn-content">
+                    <h1>Близнецы</h1>
+                    <p>Мои сыновья родились в один день 5 июля. Вчера им исполнилось 30 лет, они уже успешные люди, каждый
+                        с работой, со своей семьей, детьми. Они звонят мне почти каждый день, и я не могла и мечтать о
+                        таких заботливых детях.<br><br>
+                        Свои 30 лет они встречали со мной, в узком семейном кругу. Я долго думала,
+                        что можно им подарить. Они взрослые, у них уже все есть, да и не приняли бы они от меня дорогого
+                        подарка. Я случайно наткунулась на сайт вашей компании Звезда в Подарок. Я поняла, что моим детям
+                        не нужны дорогие вещи или украшения, им нужен символ, который будет скреплять их вместе и в горе и
+                        в добрые времена. <br><br>
+                        Я решила купить им двойную звезду в созвездии Близнецы. Назвать звезду их именами
+                        было правильным решением, я в этом уверена. Все-таки мы одна семья.</p>
+                </div>
+            </div>
+            <div class="story-mobile-bg">
+                <img src="{% static 'img/ist_pod_story-1_MOB.jpg' %}">
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="random-reviews">
+
+    <div class="r-reviews-title">
+        <h1 class="r-reviews-title">Отзывы</h1>
+    </div>
+
+{% random_review %}
+
+    <div class="allreviews-button-holder">
+        <a href="{% url 'promotions:reviews' %}"><button class="allreviews-button">Еще отзывы</button></a>
+    </div>
+
+</section>
+{% endblock %}
+{% block footer_js %}
+<script src="{% static "js/starshop.js" %}"></script>
+<script>
+    const ioasa_information_template = document.getElementById('ioasa_information_template');
+    const bundle_star_template = document.getElementById('bundle-star');
+    const bundle_registration_template = document.getElementById('bundle-registration');
+    const bundle_dossier_template = document.getElementById('bundle-dossier');
+    const bundle_satfoto_template = document.getElementById('bundle-satfoto');
+    const bundle_certificate_template = document.getElementById('bundle-certificate');
+    const bundle_qr_certificate_template = document.getElementById('bundle-qr-certificate');
+    const bundle_scroll_template = document.getElementById('bundle-scroll');
+    const bundle_map_template = document.getElementById('bundle-map');
+    const bundle_video_template = document.getElementById('bundle-video');
+    const bundle_ornament_template = document.getElementById('bundle-ornament');
+    const bundle_telescope_template = document.getElementById('bundle-telescope');
+    const bundle_watches_template = document.getElementById('bundle-watches');
+
+
+
+    tippy('#ioasa_information', {
+        content: ioasa_information_template.innerHTML,
+        theme: 'ioasa',
+        placement: 'left',
+        arrow: true,
+        interactive: true,
+    });
+
+    tippy('.bundle-star', {
+        content: bundle_star_template.innerHTML,
+        theme: 'bundle',
+        placement: 'right',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-registration', {
+        content: bundle_registration_template.innerHTML,
+        theme: 'bundle',
+        placement: 'right',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-dossier', {
+        content: bundle_dossier_template.innerHTML,
+        theme: 'bundle',
+        placement: 'left',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-satfoto', {
+        content: bundle_satfoto_template.innerHTML,
+        theme: 'bundle',
+        placement: 'left',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-certificate', {
+        content: bundle_certificate_template.innerHTML,
+        theme: 'bundle',
+        placement: 'right',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-qr-certificate', {
+        content: bundle_qr_certificate_template.innerHTML,
+        theme: 'bundle',
+        placement: 'right',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-scroll', {
+        content: bundle_scroll_template.innerHTML,
+        theme: 'bundle',
+        placement: 'left',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-map', {
+        content: bundle_map_template.innerHTML,
+        theme: 'bundle',
+        placement: 'left',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-video', {
+        content: bundle_video_template.innerHTML,
+        theme: 'bundle',
+        placement: 'right',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-ornament', {
+        content: bundle_ornament_template.innerHTML,
+        theme: 'bundle',
+        placement: 'right',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-telescope', {
+        content: bundle_telescope_template.innerHTML,
+        theme: 'bundle',
+        placement: 'left',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+    tippy('.bundle-watches', {
+        content: bundle_watches_template.innerHTML,
+        theme: 'bundle',
+        placement: 'left',
+        arrow: true,
+        animation: 'perspective',
+    });
+
+</script>
+{% endblock %}

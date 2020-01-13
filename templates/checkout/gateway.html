@@ -1,0 +1,35 @@
+{% extends "starshop-base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}
+    Оформление покупки | Звезда в Подарок
+{% endblock %}
+
+
+{% block content %}
+<section class="basket checkout-email">
+    <div class="basket-header-image">
+        <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+    </div>
+    <h1>Введите адрес электронной почты</h1>
+    <form action="." method="post">
+        {% csrf_token %}
+        <div class="checkout-email-input">
+            <input type="email" name="username" class="form-control" required="" id="id_username" placeholder="Мой адрес электронной почты">
+        </div>
+        <div style="display: none" value="checked">
+            {{ form.options.0 }}
+        </div>
+        <div class="checkout-email-button">
+            <button type="submit">Продолжить</button>
+        </div>
+        <div class="checkout-email-nomail">
+            <a href="{% url 'checkout:nomail' %}">
+                <p>У меня нет адреса электронной почты</p>
+            </a>
+        </div>
+    </form>
+</section>
+{% endblock content %}
+

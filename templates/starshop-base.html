@@ -1,0 +1,68 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    {% block head %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block description %}Купить или подарить звезду на небе с официальной регистрацией. Красивый и оригинальный подарок не оставит равнодушным никого. Звезда в Подарок - это символ выражения чувств и признания заслуг. Оставьте имя навечно в памяти бесконечной вселенной.{% endblock %}" />
+        <title>{% block title %}Купить звезду в подарок - официальная регистрация имен звезд.{% endblock %}</title>
+
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="icon" href="{% static 'img/iosa-star.png' %}" type="image/x-icon" />
+        <script src="https://unpkg.com/popper.js@1"></script>
+        <script src="https://unpkg.com/tippy.js@4"></script>
+    </head>
+    {% endblock %}
+    <body>
+    {% block cart %}
+    <div class="cart-wrapper">
+        <div class="cart-fixed">
+            <div class="cart-icon">
+                <a href="{% url 'basket:summary' %}" class="cart-row">
+                    <img src="{% static "img/cart.png" %}">
+                    <p id="basket-text">ВАША <br> КОРЗИНА</p>
+                    <div class="overall">{{ request.basket.num_lines }}</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        {% block nav_account_navbar_authenticated %}
+            {% if user.is_staff or perms.partner.dashboard_access %}
+                <li><a href="{% url 'dashboard:index' %}">Панель</a></li>
+            {% endif %}
+            <li><a href="{% url 'customer:logout' %}">Выйти</a></li>
+        {% endblock %}
+    {% endif %}
+
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block footer %}
+        <section class="footer" id="footer">
+            <div class="footer-logo">
+                <a href="{% url 'promotions:home' %}"><img src="{% static "img/logo.png" %}"></a>
+            </div>
+            <div class="footer-links">
+                <a href="{% url 'promotions:home' %}#constellations-bg">Назвать звезду</a>
+                <a href="{% url 'promotions:home' %}#ioasa">IOASA</a>
+                <a href="{% url 'promotions:terms' %}">Условия</a>
+                <a href="{% url 'promotions:home' %}#stories">Истории</a>
+                <a href="{% url 'promotions:reviews' %}">Отзывы</a>
+                <a href="#footer">Контакты</a>
+            </div>
+            <div class="footer-law">
+                <p>Компания "Звезда в подарок". Все права защищены.</p>
+                <a href="{% url 'promotions:oferta' %}">Публичная оферта</a>
+                <a href="{% url 'promotions:agreement' %}">Пользовательское соглашение</a>
+            </div>
+        </section>
+        <script src="{% static 'js/main.js' %}"></script>
+    {% endblock %}
+    {% block footer_js %}
+    {% endblock %}
+    </body>
+</html>

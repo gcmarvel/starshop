@@ -1,0 +1,12 @@
+{% extends 'starshop-base.html' %}
+{% load staticfiles %}
+{% block title %}История подарка | Звезда в Подарок {% endblock %}
+{% block content %}
+<section class="basket checkout-email">
+    <div class="basket-header-image">
+        <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+    </div>
+    <h1>Спасибо!<br> Вы можете вернуться на сайт по ссылке ниже</h1>
+    <a href={% url 'promotions:home' %}><p>Вернуться на сайт</p></a>
+</section>
+{% endblock %}

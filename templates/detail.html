@@ -1,0 +1,136 @@
+{% extends "starshop-base.html" %}
+
+{% load staticfiles %}
+{% load thumbnail %}
+{% load constellation_tags %}
+{% load basket_tags %}
+{% load widget_tweaks %}
+
+{% block title %}Купить звезду {{ product.title }} в подарок {% endblock %}
+{% block description %}{% if product.product_class_id != 7 %}{% star_class product %} {{ product.title }} - это звезда на небе в созвездии {% category_name product %}.
+Купить или подарить звезду {{ product.title }} с официальной регистрацией в каталоге IOASA можно на нашем сайте Звезда в Подарок.{% else %}{{ product.title }}.
+Подобрать звезду в подарок с официальной регистрацией в каталоге IOASA можно на нашем сайте Звезда в Подарок.{% endif %}{% endblock %}
+
+{% block content %}
+
+<div class="detail-wrapper">
+    <div class=" row back-to-index">
+        <div class="back-to-index-image">
+            <a href="{% url "promotions:home" %}#constellations-bg"><img src="{% static "img/btn-back.png" %}"></a>
+        </div>
+        <div class="back-to-index-text">
+            <a href="{% url "promotions:home" %}#constellations-bg" class="no-decoration">
+                <p>Выбрать</p>
+                <p>другую звезду</p>
+            </a>
+        </div>
+    </div>
+    <div class="detail-main">
+        <div class="row">
+            <div class="col-50 relative">
+            {% if product.product_class_id != 7 %}
+                <div class="big-star-label">
+                    <p>{{ product.title }}</p>
+                    <div class="star-underscore">
+                        <img src="{% static "img/star-underscore.png" %}">
+                    </div>
+                </div>
+            {% endif %}
+                <div class="star-color-image relative">
+                    {% if product.product_class_id != 7 %}
+                        {% thumbnail product.get_all_images.1.original "440x400" upscale=False as thumb %}
+                        <img src="{{ thumb.url }}" alt="{{ product.get_title }}" />
+                        {% endthumbnail %}
+                        <div class="star-show-name absolute" id="showname"></div>
+                    {% else %}
+                        <img src="{% constructor_class_big product %}" alt="{{ product.get_title }}" />
+                        <div class="star-show-name absolute" id="showname"></div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-50">
+                <div class="product-title">
+                {% if product.product_class_id != 7 %}
+                    <h1>{{ product.title }}: &nbsp; &nbsp;{% star_class product %}</h1>
+                    <h2>Созвездие «{% category_name product %}»</h2>
+                {% else %}
+                    <h1>{{ product.attr.starclass }}</h1>
+                    <h2>Созвездие «{{ product.attr.constellation }}»</h2>
+                {% endif %}
+                </div>
+                <div class="product-price">
+                     <h2>Цена: {% star_price product %} </h2>
+                </div>
+                <div class="row product-buttons">
+                    <div class="basket-div">
+                        {% basket_form request product as basket_form %}
+                        <form id="add_to_basket_form" action="{% url 'basket:add' pk=product.pk  %}" method="post">
+                            {% csrf_token %}
+                            {% for field in basket_form %}
+                                {% render_field field %}
+                            {% endfor %}
+                            <button type="submit" class="basket-button" value="Добавить в корзину" data-loading-text="Добавляем в корзину">Добавить в корзину</button>
+                        </form>
+                    </div>
+                    <div class="buy-div">
+                        {% basket_form request product as basket_form %}
+                        <form id="add_to_basket_form" action="{% url 'basket:oneclickbuy' pk=product.pk  %}" method="post">
+                            {% csrf_token %}
+                            {% for field in basket_form %}
+                                {% render_field field %}
+                            {% endfor %}
+                            <button type="submit" class="buy-button" value="Купить" data-loading-text="Добавляем в корзину">Купить</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row try-name">
+                    <h3>Примерить имя</h3><input id="tryname">
+                </div>
+            </div>
+        </div>
+        {% if product.product_class_id != 7 %}
+        <div class="row star-attributes">
+            <div class="col-50">
+                <h2>Характеристики звезды</h2>
+                <div class="row">
+                    <div class="col-50">
+                        <p>ID звезды:</p>
+                        <p>Тип звезды:</p>
+                        <p>Звездная величина:</p>
+                        <p>Цена:</p>
+                    </div>
+                    <div class="col-50">
+                        <p>{{ product.title }}</p>
+                        <p><span style="color: black; padding:0.2vw; background-color: {% star_name_color product %}">{% star_class product %}</span></p>
+                        <p>{{ product.attr.magnitude }}</p>
+                        <p>{% star_price product %} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-50">
+                <h2>&nbsp;</h2>
+                <div class="row">
+                    <div class="col-50">
+                        <p>Спектральный класс:</p>
+                        <p>Расстояние до звезды:</p>
+                        <p>Прямое восхождение:</p>
+                        <p>Склонение:</p>
+                    </div>
+                    <div class="col-50">
+                        <p>{{ product.attr.spectrum }}</p>
+                        <p>{{ product.attr.distance }}</p>
+                        <p>{{ product.attr.ascension }}</p>
+                        <p>{{ product.attr.declination }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% star_description product %}
+    {% detail_present product %}
+</div>
+{% endblock %}
+{% block footer_js%}
+<script src="{% static "js/detail.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'starshop-base.html' %}
+{% load staticfiles %}
+
+{% block title %}Отзывы покупателей zvezdavpodarok.ru{% endblock %}
+
+{% block content %}
+<section class="allreviews">
+
+    <div class="back-to-index-page">
+        <a href="{% url 'promotions:home' %}"><img src="{% static 'img/buttonback.png' %}"></a>
+        <a href="{% url 'promotions:home' %}"><h1>Назад</h1></a>
+    </div>
+
+
+    <div class="reviews-title">
+        <h1>Все отзывы</h1>
+    </div>
+
+    <div class="r-reviews-wrapper">
+
+        {% for review in reviews %}
+
+        <div class="reviews-card">
+            <div class="reviews-sm-image">
+                <img src="../{{ review.image }}">
+            </div>
+            <div class="reviews-text">
+                <div class="reviews-date">
+                    <p>{{ review.date }}</p>
+                </div>
+                <div class="reviews-content">
+                    <p>{{ review.review }}</p>
+                </div>
+                <div class="reviews-name">
+                    <p>{{ review.name }}</p>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+{% endblock %}

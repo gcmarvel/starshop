@@ -1,0 +1,65 @@
+{% extends 'starshop-base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section class="terms">
+    <div class="basket-header-image">
+        <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+    </div>
+    <div class="terms-delivery">
+        <h1>ДОСТАВКА</h1>
+        <p>Бесплатная доставка курьером или почтой по городам России и СНГ</p>
+        <div class="terms-image-line">
+            <img src="{% static 'img/delivery_pony.png' %}">
+            <img src="{% static 'img/delivery_post.png' %}">
+            <img src="{% static 'img/delivery_ems.png' %}">
+            <img src="{% static 'img/delivery_sdek.png' %}">
+            <img src="{% static 'img/delivery_boxberry.png' %}">
+            <img src="{% static 'img/delivery_spsr.png' %}">
+            <img src="{% static 'img/delivery_tnt.png' %}">
+        </div>
+    </div>
+    <div class="terms-payment">
+        <h1>ОПЛАТА</h1>
+        <p>Оплата банковской картой, электронными деньгами или через терминал</p>
+        <div class="terms-image-line">
+            <img src="{% static 'img/oplata_visa.png' %}">
+            <img src="{% static 'img/oplata_mas.png' %}">
+            <img src="{% static 'img/oplata_yandex.png' %}">
+            <img src="{% static 'img/oplata_webm.png' %}">
+            <img src="{% static 'img/oplata_sb.png' %}">
+            <img src="{% static 'img/oplata_qiwi.png' %}">
+        </div>
+    </div>
+    <div class="terms-timeline">
+        <h1>СРОКИ</h1>
+        <table>
+            <tr>
+                <td>
+                    <p>Регистрация звезды в международном звёздном каталоге IOASA</p>
+                    <p>Публикация персональной страницы звезды</p>
+                </td>
+                <td>
+                    <p>24 часа</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Сборка и отправка подарочного набора курьерской службой</p>
+                </td>
+                <td>
+                    <p>до 3 дней</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Изготовление персонального видеопутешествия</p>
+                </td>
+                <td>
+                    <p>до 5 дней</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <h3>Прочитать публичную <a href="{% url 'promotions:oferta' %}">оферту</a></h3>
+</section>
+{% endblock %}
