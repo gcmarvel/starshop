@@ -19,13 +19,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.0 %}">{% star_class products.0 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.0.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.0.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.0 %} - звезда {{ products.0.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.0 %}" alt="{% category_name products.0 %} - звезда {{ products.0.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.0 %}</div>
@@ -96,13 +96,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.1 %}">{% star_class products.1 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.1.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.1.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.1 %} - звезда {{ products.1.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.1 %}" alt="{% category_name products.1 %} - звезда {{ products.1.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.1 %}</div>
@@ -173,13 +173,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.2 %}">{% star_class products.2 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.2.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.2.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.2 %} - звезда {{ products.2.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.2 %}" alt="{% category_name products.2 %} - звезда {{ products.2.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.2 %}</div>
@@ -250,13 +250,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.3 %}">{% star_class products.3 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.3.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.3.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.3 %} - звезда {{ products.3.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.3 %}" alt="{% category_name products.3 %} - звезда {{ products.3.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.3 %}</div>
@@ -325,13 +325,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.4 %}">{% star_class products.4 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.4.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.4.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.4 %} - звезда {{ products.4.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.4 %}" alt="{% category_name products.4 %} - звезда {{ products.4.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.4 %}</div>
@@ -400,13 +400,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.5 %}">{% star_class products.5 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.5.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.5.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.5 %} - звезда {{ products.5.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.5 %}" alt="{% category_name products.5 %} - звезда {{ products.5.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.5 %}</div>
@@ -475,13 +475,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.6 %}">{% star_class products.6 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.6.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.6.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.6 %} - звезда {{ products.6.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.6 %}" alt="{% category_name products.6 %} - звезда {{ products.6.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.6 %}</div>
@@ -551,13 +551,13 @@
         <div class="tooltip-starclass" style="color: {% star_name_color products.7 %}">{% star_class products.7 %}</div>
     </div>
     <div class="relative">
-    {% with image=products.7.primary_image %}
-        {% thumbnail image.original "x115" upscale=False as thumb %}
+
+
             <a href="{{ products.7.get_absolute_url }}">
-                <img src="{{ thumb.url }}" alt="{% category_name products.7 %} - звезда {{ products.7.title }}" class="thumbnail">
+                <img src="{% thumbnail_img products.7 %}" alt="{% category_name products.7 %} - звезда {{ products.7.title }}" class="thumbnail">
             </a>
-        {% endthumbnail %}
-    {% endwith %}
+
+
         <div class="absolute thumbnail-overlay">
             <div class="row">
                 <div class="rounded-magnitude">{% star_magnitude_round products.7 %}</div>

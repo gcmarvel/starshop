@@ -1896,6 +1896,17 @@ a:visited {
     text-align: justify;
 }
 
+.star-full-image {
+    padding: 0 4vw;
+    margin-bottom: 3vw;
+}
+
+.star-full-image img{
+    box-shadow: 0 0 3vw #91bbe9;
+    width: 100%;
+    border-radius: 5px;
+}
+
 .present-wrapper{
     padding: 0 6vw;
 }

@@ -151,6 +151,22 @@ def get_attribute(product):
         return '/static/img/detail/double1.png'
 
 
+@register.simple_tag (name="thumbnail_img")
+def get_thumbnail(product):
+    if product.product_class_id == 1:
+        return '/static/img/thumbnail_white.png'
+    if product.product_class_id == 2:
+        return '/static/img/thumbnail_yellow.png'
+    if product.product_class_id == 3:
+        return '/static/img/thumbnail_orange.png'
+    if product.product_class_id == 4:
+        return '/static/img/thumbnail_blue.png'
+    if product.product_class_id == 5:
+        return '/static/img/thumbnail_red.png'
+    if product.product_class_id == 6:
+        return '/static/img/thumbnail_double.png'
+
+
 @register.simple_tag (name="present")
 def get_magnitude(product):
     if 10 > product.attr.magnitude >= 9:

@@ -128,6 +128,9 @@
         {% endif %}
     </div>
     {% star_description product %}
+    <div class="star-full-image">
+        <img src={{ product.get_all_images.0.original.url }} alt="{{ product.get_title }}" />
+    </div>
     {% detail_present product %}
 </div>
 {% endblock %}
