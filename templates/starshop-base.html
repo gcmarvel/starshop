@@ -29,15 +29,6 @@
         </div>
     </div>
 
-    {% if user.is_authenticated %}
-        {% block nav_account_navbar_authenticated %}
-            {% if user.is_staff or perms.partner.dashboard_access %}
-                <li><a href="{% url 'dashboard:index' %}">Панель</a></li>
-            {% endif %}
-            <li><a href="{% url 'customer:logout' %}">Выйти</a></li>
-        {% endblock %}
-    {% endif %}
-
     {% endblock %}
     {% block content %}
     {% endblock %}
