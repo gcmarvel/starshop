@@ -452,7 +452,161 @@
 
 </section>
 
+<section class="constellation-section" id="constellations-bg">
+    <div class="constellation-header"><h1>Чтобы подарить звезду нажмите на созвездие</h1></div>
 
+    <div class="constellations-bg">
+        <div id="constellation-wrapper" class="container constellations">
+            <a href = "{% url 'catalogue:constellation' category_slug='feniks' %}">
+            <div class="inline relative">
+                <img src="{% static "/img/phoenix-first.png" %}" id="phoenix" class="constellationimg" alt="Созвездие Феникс" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Феникс</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='delfin' %}">
+            <div class="inline relative">
+                <img src="{% static "/img/delphinus-first.png" %}" id="delphinus" class="constellationimg" alt="Созвездие Дельфин" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Дельфин</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='vodolei' %}">
+            <div class="inline relative">
+                <img src="{% static "img/aquarius-first.png" %}" id="aquarius" class="constellationimg" alt="Созвездие Водолей" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Водолей</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='rys' %}">
+            <div class="inline relative">
+                <img src="{% static "img/lynx-first.png" %}" id="lynx" class="constellationimg" alt="Созвездие Рысь" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Рысь</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='orion' %}">
+            <div class="inline relative">
+                <img src="{% static "img/orion-first.png" %}" id="orion" class="constellationimg" alt="Созвездие Орион" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Орион</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='oven' %}">
+            <div class="inline relative">
+                <img src="{% static "img/aries-first.png" %}" id="aries" class="constellationimg" alt="Созвездие Овен" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Овен</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='lebed' %}">
+            <div class="inline relative">
+                <img src="{% static "img/cygnus-first.png" %}" id="cygnus" class="constellationimg" alt="Созвездие Лебедь" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Лебедь</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='kozerog' %}">
+            <div class="inline relative">
+                <img src="{% static "img/capricorn-first.png" %}" id="capricorn" class="constellationimg" alt="Созвездие Козерог" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Козерог</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='telets' %}">
+            <div class="inline relative">
+                <img src="{% static "img/taurus-first.png" %}" id="taurus" class="constellationimg" alt="Созвездие Телец" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Телец</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='volk' %}">
+            <div class="inline relative">
+                <img src="{% static "img/lupus-first.png" %}" id="lupus" class="constellationimg" alt="Созвездие Волк" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Волк</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='pegas' %}">
+            <div class="inline relative">
+                <img src="{% static "img/pegasus-first.png" %}" id="pegasus" class="constellationimg" alt="Созвездие Пегас" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Пегас</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='oriol' %}">
+            <div class="inline relative">
+                <img src="{% static "img/aquilla-first.png" %}" id="aquilla" class="constellationimg" alt="Созвездие Орёл" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Орёл</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='lira' %}">
+            <div class="inline relative">
+                <img src="{% static "img/lyra-first.png" %}" id="lyra" class="constellationimg" alt="Созвездие Лира" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Лира</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='strelets' %}">
+            <div class="inline relative">
+                <img src="{% static "img/sagittarius-first.png" %}" id="sagittarius" class="constellationimg" alt="Созвездие Стрелец" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Стрелец</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='rak' %}">
+            <div class="inline relative">
+                <img src="{% static "img/cancer-first.png" %}" id="cancer" class="constellationimg" alt="Созвездие Рак" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Рак</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='voron' %}">
+            <div class="inline relative">
+                <img src="{% static "img/corvus-first.png" %}" id="corvus" class="constellationimg" alt="Созвездие Ворон" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Ворон</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='deva' %}">
+            <div class="inline relative">
+                <img src="{% static "img/virgo-first.png" %}" id="virgo" class="constellationimg" alt="Созвездие Дева" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Дева</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='ryby' %}">
+            <div class="inline relative">
+                <img src="{% static "img/pisces-first.png" %}" id="pisces" class="constellationimg" alt="Созвездие Рыбы" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Рыбы</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='edinorog' %}">
+            <div class="inline relative">
+                <img src="{% static "img/monoceros-first.png" %}" id="monoceros" class="constellationimg" alt="Созвездие Единорог" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Единорог</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='skorpion' %}">
+            <div class="inline relative">
+                <img src="{% static "img/scorpio-first.png" %}" id="scorpio" class="constellationimg" alt="Созвездие Скорпион" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Скорпион</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='vesy' %}">
+            <div class="inline relative">
+                <img src="{% static "img/libra-first.png" %}" id="libra" class="constellationimg" alt="Созвездие Весы" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Весы</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='bliznetsy' %}">
+            <div class="inline relative">
+                <img src="{% static "img/gemini-first.png" %}" id="gemini" class="constellationimg" alt="Созвездие Близнецы" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Близнецы</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='lev' %}">
+            <div class="inline relative">
+                <img src="{% static "img/leo-first.png" %}" id="leo" class="constellationimg" alt="Созвездие Лев" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Лев</div>
+            </div>
+            </a>
+            <a href = "{% url 'catalogue:constellation' category_slug='drakon' %}">
+            <div class="inline relative">
+                <img src="{% static "img/draco-first.png" %}" id="draco" class="constellationimg" alt="Созвездие Дракон" onmouseover="animateConstellation(this.id)" onmouseout="animateConstellationRev(this.id)">
+                <div class="absolute constellation-label">Дракон</div>
+            </div>
+            </a>
+        </div>
+    </div>
+
+
+
+</section>
 
 {% include "constructor.html" %}
 

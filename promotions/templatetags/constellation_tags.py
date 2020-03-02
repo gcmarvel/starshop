@@ -33,6 +33,58 @@ def get_name(context, name):
     return template.render({'products': products}, request=context['request'])
 
 
+@register.simple_tag (name="constellation_image")
+def get_image(category):
+    if category == "Феникс":
+        return '/static/img/phoenix-full.png'
+    if category == "Дельфин":
+        return '/static/img/delphinus-full.png'
+    if category == "Водолей":
+        return '/static/img/aquarius-full.png'
+    if category == "Рысь":
+        return '/static/img/lynx-full.png'
+    if category == "Орион":
+        return '/static/img/orion-full.png'
+    if category == "Овен":
+        return '/static/img/aries-full.png'
+    if category == "Лебедь":
+        return '/static/img/cygnus-full.png'
+    if category == "Козерог":
+        return '/static/img/capricorn-full.png'
+    if category == "Телец":
+        return '/static/img/taurus-full.png'
+    if category == "Волк":
+        return '/static/img/lupus-full.png'
+    if category == "Пегас":
+        return '/static/img/pegasus-full.png'
+    if category == "Орёл":
+        return '/static/img/aquilla-full.png'
+    if category == "Лира":
+        return '/static/img/lyra-full.png'
+    if category == "Стрелец":
+        return '/static/img/sagittarius-full.png'
+    if category == "Рак":
+        return '/static/img/cancer-full.png'
+    if category == "Ворон":
+        return '/static/img/corvus-full.png'
+    if category == "Дева":
+        return '/static/img/virgo-full.png'
+    if category == "Рыбы":
+        return '/static/img/pisces-full.png'
+    if category == "Единорог":
+        return '/static/img/monoceros-full.png'
+    if category == "Скорпион":
+        return '/static/img/scorpio-full.png'
+    if category == "Весы":
+        return '/static/img/libra-full.png'
+    if category == "Близнецы":
+        return '/static/img/gemini-full.png'
+    if category == "Лев":
+        return '/static/img/leo-full.png'
+    if category == "Дракон":
+        return '/static/img/draco-full.png'
+
+
 @register.simple_tag (name="category_name")
 def get_name(prod):
     prod_cat = ProductCategory.objects.get(product_id=prod.id)

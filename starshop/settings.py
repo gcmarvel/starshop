@@ -4,6 +4,8 @@ from oscar.defaults import *
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
 from oscar import get_core_apps
 
+import socket
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -16,9 +18,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6l74+aofc@^#sif%7&4qjukya3-k-i!mrumzxuz1=fo5m&h(g5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+try:
+    HOSTNAME = socket.gethostname()
+except:
+    HOSTNAME = 'localhost'
+
+
+
+if HOSTNAME == 'gcm-django-bootstraper':
+    DEBUG = True
+else:
+    DEBUG = False
+
 
 ALLOWED_HOSTS = [
+    'zvezdavpodarok.ru',
     'zvezdavpodarok.pythonanywhere.com',
     '127.0.0.1'
 ]
@@ -37,6 +52,7 @@ INSTALLED_APPS = [
     'flatpages',
     'widget_tweaks',
     'starshop',
+    'debug_toolbar',
 
 ] + get_core_apps([
     'promotions',
@@ -63,6 +79,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
     'flatpages.middleware.FlatpageFallbackMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -182,3 +199,9 @@ THUMBNAIL_FORMAT = 'PNG'
 
 
 OSCAR_ALLOW_ANON_CHECKOUT = True
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
+]

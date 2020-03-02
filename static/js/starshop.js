@@ -91,68 +91,6 @@ function hideContent(){
 
 // Constellations js
 
-const constellationsimg = document.querySelectorAll('.constellationimg');
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function scaleConstellations(con) {
-    document.getElementById('constellation-wrapper').style.opacity = 1;
-    fadeOut(document.getElementById('constellation-wrapper'));
-    async function fadeOut (conint){
-        for (var x=0;x<20;x+=1) {
-            conint.style.opacity -= 0.05;
-            await sleep(20);
-            if (conint.style.opacity <= 0.1) {
-                conint.style.display = "none";
-                var fullcon = con + "-full";
-                document.getElementById(fullcon).style.display = "block";
-                fadeIn(document.getElementById(fullcon));
-
-                async function fadeIn(conint) {
-                    for (var x = 0; x < 20; x += 1) {
-                        conint.style.opacity -= -0.05;
-                        await sleep(20);
-                        if (conint.style.opacity >= 0.9) {
-                            conint.style.opacity = 1;
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-}
-
-async function unscaleConstellations(con) {
-    let fullcon = con + "-full";
-    document.getElementById(fullcon).style.opacity = 1;
-    fadeOut(document.getElementById(fullcon));
-    async function fadeOut (conint){
-        for (var x=0;x<20;x+=1) {
-            conint.style.opacity -= 0.05;
-            await sleep(20);
-            if (conint.style.opacity <= 0.1){
-                conint.style.display = "none";
-                document.getElementById('constellation-wrapper').style.opacity = 0.1;
-                document.getElementById('constellation-wrapper').style.display = "block";
-                fadeIn(document.getElementById('constellation-wrapper'));
-
-                async function fadeIn(conint) {
-                    for (var x = 0; x < 20; x += 1) {
-                        conint.style.opacity -= -0.05;
-                        await sleep(20);
-                        if (conint.style.opacity >= 0.9) {
-                            conint.style.opacity = 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 function animateConstellation(con){
 	document.getElementById(con).src = "static/img/" + con + "-anim.gif";
 }

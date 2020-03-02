@@ -1,4 +1,5 @@
 from oscar.apps.catalogue.views import ProductDetailView as OscarDetailView
+from oscar.apps.catalogue.views import ProductCategoryView as OscarCategoryView
 
 
 class ProductDetailView(OscarDetailView):
@@ -14,3 +15,6 @@ class ProductDetailView(OscarDetailView):
                 self.template_folder, self.object.get_product_class().slug),
             'detail.html']
 
+
+class ProductCategoryView(OscarCategoryView):
+    template_name = 'constellation.html'

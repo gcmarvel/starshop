@@ -701,8 +701,6 @@ a:visited {
 }
 
 .fullconstellation {
-	opacity: 0;
-	display: none;
 	width: 84vw;
     position:relative;
 }
@@ -967,6 +965,16 @@ a:visited {
     display: none;
 }
 
+.constellation-description {
+    margin: 0 8vw;
+    padding: 4vw 0;
+}
+
+.constellation-description span {
+    font-family: 'EtelkaText', sans-serif!important;
+    line-height: 1.8vw!important;
+    font-size: 1.5vw!important;
+}
 /*Constructor Section */
 
 .star-constructor{
@@ -4188,6 +4196,11 @@ a:visited {
 
     .tippy-tooltip.starshop-theme {
         width: 38vw;
+    }
+
+    .constellation-description span {
+        line-height: 4vw!important;
+        font-size: 3vw!important;
     }
 
     /*Constructor Section*/

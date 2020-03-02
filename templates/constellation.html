@@ -1,0 +1,36 @@
+{% extends "starshop-base.html" %}
+{% load staticfiles %}
+{% load basket_tags %}
+{% load django_tables2 %}
+{% load con_reviews_tags %}
+{% load constellation_tags %}
+{% load currency_filters %}
+
+{% block content %}
+<section class="constellation-section">
+    <div class="fullconstellation-background">
+        <div class = "fullconstellation">
+            <a class="backtolist no-decoration" href="{% url 'promotions:home' %}">
+                <div class="row">
+                    <div class="backtolist-image"><img src="{% static "img/btn-back.png" %}" alt="Звёзды в созвездии {{ category.name }}"></div>
+                    <div class="backtolist-text">
+                        <p>Назад</p>
+                        <p>к созвездиям</p>
+                    </div>
+                </div>
+            </a>
+            <div class="constellation-title">
+                <h1>Созвездие <span class="code-pro-light">«</span>{{ category.name }}<span class="code-pro-light">»</span></h1>
+                <p>Выберите звезду</p>
+            </div>
+            {% constellation_name category.name %}
+            <img src="{% constellation_image category.name %}" class = "fullconstellationimg">
+            <div class="constellation-tip-desktop">Наведите курсор на звезду, чтобы получить подробную информацию</div>
+            <div class="constellation-tip-mobile">Нажмите на звезду, чтобы получить подробную информацию</div>
+        </div>
+    </div>
+    <div class="constellation-description">
+        {{ category.description | safe }}
+    </div>
+</section>
+{% endblock content %}
