@@ -33,7 +33,7 @@ else:
 
 
 ALLOWED_HOSTS = [
-    'zvezdavpodarok.ru',
+    'www.zvezdavpodarok.ru',
     'zvezdavpodarok.pythonanywhere.com',
     '127.0.0.1'
 ]
