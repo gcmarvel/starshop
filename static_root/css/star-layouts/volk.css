@@ -1,0 +1,83 @@
+#volk-star0{
+    left: 20%;
+    top: 30%;
+}
+
+#volk-star1{
+    left: 75%;
+    top: 35%;
+}
+
+#volk-star2{
+    left: 45%;
+    top: 70%;
+}
+
+#volk-star3{
+    left: 57%;
+    top: 55%;
+}
+
+#volk-star4{
+    left: 30%;
+    top: 50%;
+}
+
+#volk-star5{
+    left: 50%;
+    top: 35%;
+}
+
+#volk-star6{
+    left: 65%;
+    top: 40%;
+}
+
+#volk-star7{
+    left: 75%;
+    top: 65%;
+}
+
+
+@media(max-width: 480px){
+
+    #volk-star0{
+        left: 35%;
+        top: 25%;
+    }
+
+    #volk-star1{
+        left: 65%;
+        top: 50%;
+    }
+
+    #volk-star2{
+        left: 15%;
+        top: 70%;
+    }
+
+    #volk-star3{
+        left: 35%;
+        top: 60%;
+    }
+
+    #volk-star4{
+        left: 60%;
+        top: 40%;
+    }
+
+    #volk-star5{
+        left: 15%;
+        top: 35%;
+    }
+
+    #volk-star6{
+        left: 55%;
+        top: 70%;
+    }
+
+    #volk-star7{
+        left: 30%;
+        top: 45%;
+    }
+}

@@ -3,6 +3,7 @@
 var navModal = document.getElementById("nav-mobile");
 var navBtn = document.getElementById("nav-menu");
 var navClose = document.getElementById("nav-close");
+var constellationsimg = document.querySelectorAll('constellationimg');
 
 navBtn.onclick = function() {
   navModal.style.display = "block";};

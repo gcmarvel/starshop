@@ -1,0 +1,83 @@
+#ryby-star0{
+    left: 25%;
+    top: 40%;
+}
+
+#ryby-star1{
+    left: 65%;
+    top: 35%;
+}
+
+#ryby-star2{
+    left: 47%;
+    top: 55%;
+}
+
+#ryby-star3{
+    left: 70%;
+    top: 58%;
+}
+
+#ryby-star4{
+    left: 35%;
+    top: 60%;
+}
+
+#ryby-star5{
+    left: 45%;
+    top: 35%;
+}
+
+#ryby-star6{
+    left: 55%;
+    top: 45%;
+}
+
+#ryby-star7{
+    left: 55%;
+    top: 75%;
+}
+
+
+@media(max-width: 480px){
+
+    #ryby-star0{
+        left: 35%;
+        top: 40%;
+    }
+
+    #ryby-star1{
+        left: 50%;
+        top: 47%;
+    }
+
+    #ryby-star2{
+        left: 15%;
+        top: 70%;
+    }
+
+    #ryby-star3{
+        left: 36%;
+        top: 65%;
+    }
+
+    #ryby-star4{
+        left: 75%;
+        top: 30%;
+    }
+
+    #ryby-star5{
+        left: 25%;
+        top: 25%;
+    }
+
+    #ryby-star6{
+        left: 60%;
+        top: 62%;
+    }
+
+    #ryby-star7{
+        left: 20%;
+        top: 50%;
+    }
+}
