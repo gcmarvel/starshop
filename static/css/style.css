@@ -1,7 +1,6 @@
 /* Layout CSS */
 
 html{
-    scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
@@ -121,8 +120,8 @@ a:visited {
 }
 
 @font-face {
-  font-family: 'UbuntuCondensed';
-  src: local('UbuntuCondensed'), url('../fonts/Ubuntu-C.ttf') format("truetype");
+  font-family: 'BebasNeue';
+  src: local('BebasNeue'), url('../fonts/Bebas Neue.ttf') format("truetype");
 }
 
 .code-pro-light{
@@ -311,6 +310,14 @@ a:visited {
     display: none;
 }
 
+.ioasa-link-white, .ioasa-link-white:visited, .ioasa-link-white:link {
+    color:white;
+}
+
+.ioasa-link-white:hover {
+    color: #8e8aa8
+}
+
 /*Cart Section*/
 
 .cart-wrapper{
@@ -332,17 +339,18 @@ a:visited {
 
 .cart-row p{
 
-    font-family: 'Ubuntu Condensed', sans-serif;
+    font-family: 'BebasNeue', sans-serif;
     position: absolute;
     bottom: 1.2vw;
     right: 0;
     color: white;
     margin: 0;
     text-align: left;
-    font-size: 1vw;
+    font-size: 1.2vw;
     padding-right: 1vw;
     line-height: 1.2vw;
     transition: 0.3s opacity;
+    font-weight: 600;
 }
 
 .cart-icon {
@@ -886,6 +894,10 @@ a:visited {
 
 .tooltip-product-detail{
     font-size: 1vw;
+}
+
+.tooltip-product-detail a {
+    color: white;
 }
 
 .tooltip-price{
