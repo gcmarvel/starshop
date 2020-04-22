@@ -154,25 +154,25 @@ class ShippingAddressView(CheckoutSessionMixin, FormView):
         zipped_template = zip(lines, self.checkout_session.get_star_names().values(), self.checkout_session.get_messages().values())
         for line, star_name, message in zipped_template:
             template += f'''
-ID звезды: {line[0]} 
+            ID звезды: {line[0]} 
+                        
+            Класс: {line[1]}, Созвездие: {line[2]}, Величина: {line[3]}
+                        
+            Цена:{line[4]} 
+                        
+            Имя звезды:{star_name}
+                        
+            Послание:{message}
             
-Класс: {line[1]}, Созвездие: {line[2]}, Величина: {line[3]}
-            
-Цена:{line[4]} 
-            
-Имя звезды:{star_name}
-            
-Послание:{message}
-
-            '''
-        template += f'''
-Всего: {total}
-        
-Адрес доставки:
-        '''
-        for key, value in address.items():
+                        '''
             template += f'''
-{key}: {value}
+            Всего: {total}
+                    
+            Адрес доставки:
+                    '''
+            for key, value in address.items():
+                        template += f'''
+            {key}: {value}
             '''
 
         subject = 'Оформлена покупка'
