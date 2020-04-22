@@ -156,13 +156,17 @@ class ShippingAddressView(CheckoutSessionMixin, FormView):
             template += f'''
             ID звезды: {line[0]} 
                         
-            Класс: {line[1]}, Созвездие: {line[2]}, Величина: {line[3]}
+            Класс: {line[1]}, 
+            
+            Созвездие: {line[2]},
+             
+            Величина: {line[3]}
                         
-            Цена:{line[4]} 
+            Цена: {line[4]} 
                         
-            Имя звезды:{star_name}
+            Имя звезды: {star_name}
                         
-            Послание:{message}
+            Послание :{message}
             
                         '''
             template += f'''
@@ -177,8 +181,8 @@ class ShippingAddressView(CheckoutSessionMixin, FormView):
 
         subject = 'Оформлена покупка'
         message = template
-        sender = 'Звезда в Подарок'
-        recipients = ['zvezdavpodaroktest@gmail.com']
+        sender = 'no-reply@zvezdavpodarok.ru'
+        recipients = ['starmaster@zvezdavpodarok.ru']
         send_mail(subject, message, sender, recipients)
 
         return super(ShippingAddressView, self).form_valid(form)
