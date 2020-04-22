@@ -189,13 +189,12 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'no-reply@zvezdavpodarok.ru'
-EMAIL_HOST_PASSWORD = 'Sss66jjkol909'
+EMAIL_HOST_PASSWORD = 'cfmihcewzwlvsbal'
 DEFAULT_EMAIL_FROM = 'no-reply@zvezdavpodarok.ru'
 
 OSCAR_DEFAULT_CURRENCY = "₽"
 
 THUMBNAIL_FORMAT = 'PNG'
-
 
 OSCAR_ALLOW_ANON_CHECKOUT = True
 
