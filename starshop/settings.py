@@ -25,7 +25,6 @@ except:
     HOSTNAME = 'localhost'
 
 
-
 if HOSTNAME == 'gcm-django-bootstraper':
     DEBUG = True
 else:
