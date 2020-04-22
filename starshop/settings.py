@@ -185,12 +185,12 @@ HAYSTACK_CONNECTIONS = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'zvezdavpodaroktest'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'no-reply@zvezdavpodarok.ru'
 EMAIL_HOST_PASSWORD = 'Sss66jjkol909'
-DEFAULT_EMAIL_FROM = 'zvezdavpodaroktest@gmail.com'
+DEFAULT_EMAIL_FROM = 'no-reply@zvezdavpodarok.ru'
 
 OSCAR_DEFAULT_CURRENCY = "₽"
 
