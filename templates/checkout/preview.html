@@ -1,39 +1,120 @@
-{% extends "checkout/checkout.html" %}
-{% load i18n %}
+{% extends "starshop-base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% load currency_filters %}
+{% load purchase_info_tags %}
+{% load widget_tweaks %}
+{% load constellation_tags %}
 
 {% block title %}
-    {% trans "Order preview" %} | {{ block.super }}
+  Оплатить | Звезда в Подарок
 {% endblock %}
 
-{% block checkout_nav %}
-    {% include 'checkout/nav.html' with step=4 %}
-{% endblock %}
-
-{% block checkout_title %}
-    {% trans "Preview order" %}
-{% endblock %}
-
-{% block place_order %}
-    <form method="post" action="{% url 'checkout:preview' %}" id="place_order_form">
-        {% csrf_token %}
-        <input type="hidden" name="action" value="place_order" />
-
-        {% comment %}
-            When submitting sensitive data on the payment details page (eg a bankcard)
-            we don't want to save the data and so we pass the bound form to the preview
-            template and render it in a hidden div.  Then the payment information will
-            get re-submitted when the user confirms the order.
-        {% endcomment %}
-        <div style="display:none">
-            {% block hiddenforms %}{% endblock %}
-        </div>
-
-        <div class="form-group clearfix">
-            <div class="row">
-                <div class="col-sm-3 col-sm-offset-9">
-                     <button id='place-order' type="submit" class="btn btn-primary btn-lg btn-block" data-loading-text="{% trans 'Submitting...' %}">{% trans "Place order" %}</button>
-                </div>
+{% block content %}
+  <section class="basket checkout-preview">
+    <div class="basket-header">
+      <div class="basket-header-image">
+        <a href={% url 'promotions:home' %}><img src="{% static 'img/logo.png' %}"></a>
+      </div>
+    </div>
+    <h1>ВАШ ЗАКАЗ</h1>
+    <div class="checkout-preview-address">
+      <div class="col-50">
+        <h4>Доставка</h4>
+        <p><span>Ф.И.О:</span> {{ name }}</p>
+        <p><span>Адрес:</span> {{ address }}</p>
+        <p><span>Телефон:</span> {{ phone }}</p>
+        <p><span>Комментарий:</span> {{ comment }}</p>
+      </div>
+      <div class="col-50">
+        <h4>Всего</h4>
+        {% for line in basket %}
+          {% with product=line.product %}
+            <p><span>{{ line.product }}: </span>{{ line.line_price_excl_tax|currency:line.price_currency }}</p>
+          {% endwith %}
+        {% endfor %}
+        <h4>Сумма: {{ total }} руб.</h4>
+        <form method="post" action="{% url 'checkout:preview' %}">
+          {% csrf_token %}
+          <div class="checkout-email-button checkout-preview-button">
+            <button type="submit">Оплатить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <h4 class="preview-details-header">Подробности заказа</h4>
+    {% for line, name, message in basket_and_names %}
+      {% with product=line.product %}
+        <h4 class="preview-basket-item">{{ name }}</h4>
+        <div class="basket-items">
+          <div class="basket-line">
+            <div class="basket-line-image">
+              {% if product.product_class_id != 7 %}
+                {% with image=product.primary_image %}
+                  {% thumbnail image.original "360x200" upscale=False as thumb %}
+                    <a href="{{ product.get_absolute_url }}">
+                      <img src="{{ thumb.url }}" alt="{{ product.get_title }}"/>
+                    </a>
+                  {% endthumbnail %}
+                {% endwith %}
+              {% else %}
+                <a href="{{ product.get_absolute_url }}">
+                  <img src="{% static 'img/constructor-image.jpg' %}" alt="{{ product.get_title }}"/>
+                </a>
+              {% endif %}
             </div>
+            <div class="basket-line-text">
+              <div class="basket-product-title">
+                <h3><a href="{{ product.get_absolute_url }}">{{ line.description }}</a></h3>
+              </div>
+              <div class="basket-starclass">
+                {% if product.product_class_id != 7 %}
+                  <div class="basket-starclass-image">
+                    <img src="{% star_color product %}">
+                  </div>
+                  <p>{{ product.product_class }}</p>
+                {% else %}
+                  <div class="basket-starclass-image">
+                    <img src="{% constructor_class product %}">
+                  </div>
+                  <p>{{ product.attr.starclass }}</p>
+                {% endif %}
+              </div>
+              <div class="basket-magnitude">
+                <p>Звёздная величина: {{ product.attr.magnitude }}</p>
+              </div>
+              <div class="basket-price">
+                <p style="padding-bottom: 0.5vw">Цена:</p>
+                <p>{{ line.line_price_excl_tax|currency:line.price_currency }}</p>
+              </div>
+              <div class="basket-starclass basket-constellation">
+                {% if product.product_class_id != 7 %}
+                  <div class="basket-starclass-image">
+                    <img src="/static/img/constructor/50/{% category_name product %}.png">
+                  </div>
+                  <p>Созвездие: {% category_name product %} </p>
+                {% else %}
+                  <div class="basket-starclass-image">
+                    <img src="/static/img/constructor/50/{{ product.attr.constellation }}.png">
+                  </div>
+                  <p>Созвездие: {{ product.attr.constellation }}</p>
+                {% endif %}
+              </div>
+              <div class="basket-bundle">
+                <p>Подарочный набор: {% bundle product %}</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </form>
-{% endblock place_order %}
+        <div class="row checkout-preview-message">
+          <div>
+            <h4 style="margin: 1vw 2vw 0 0" class="preview-basket-item">Послание </h4>
+          </div>
+          <div>
+            <p>{{ message }}</p>
+          </div>
+        </div>
+      {% endwith %}
+    {% endfor %}
+  </section>
+{% endblock %}

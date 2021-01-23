@@ -4,7 +4,7 @@ from oscar.apps.basket.models import Line as BasketLine
 from django.shortcuts import redirect
 from django.views.generic import View
 from catalogue.models import Product
-from oscar.apps.partner.models import StockRecord
+from partner.models import StockRecord
 
 from oscar.apps.catalogue.models import ProductCategory
 import random

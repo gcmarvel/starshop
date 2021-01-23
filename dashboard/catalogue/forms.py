@@ -22,8 +22,8 @@ class StockRecordForm(base_forms.StockRecordForm):
 
     class Meta:
         model = StockRecord
-        fields = [
-            'partner', 'partner_sku', 'price_excl_tax',
+        fields = ['id',
+            'price_excl_tax',
             'num_in_stock',
         ]
 

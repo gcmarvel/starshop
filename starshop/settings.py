@@ -45,13 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'flatpages',
     'widget_tweaks',
     'starshop',
-    'debug_toolbar',
 
 ] + get_core_apps([
     'promotions',
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'catalogue',
     'checkout',
     'shipping',
+    'partner',
     'dashboard',
     'dashboard.catalogue',
     'dashboard.partners',
@@ -78,7 +79,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'oscar.apps.basket.middleware.BasketMiddleware',
     'flatpages.middleware.FlatpageFallbackMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (

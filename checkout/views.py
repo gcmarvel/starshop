@@ -1,16 +1,15 @@
-from django.urls import reverse_lazy
-from django.forms.formsets import formset_factory
 from django.core.mail import send_mail
+from django.forms.formsets import formset_factory
+from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
-from oscar.apps.checkout.views import IndexView as CoreIndexView
-from oscar.apps.checkout.views import PaymentMethodView as CorePaymentMethodView
-from oscar.apps.checkout.views import PaymentDetailsView as CorePaymentDetailsView
 from oscar.apps.checkout.session import CheckoutSessionMixin
+from oscar.apps.checkout.views import IndexView as CoreIndexView
+from oscar.apps.checkout.views import PaymentDetailsView as CorePaymentDetailsView
+
 from .forms import GatewayForm, NoMailForm, NameStarForm, MessageForm, AddressForm
 
 
 class NoMaiView(CheckoutSessionMixin, FormView):
-
     template_name = 'checkout/nomail.html'
     form_class = NoMailForm
     success_url = reverse_lazy('checkout:name_star')
@@ -18,18 +17,16 @@ class NoMaiView(CheckoutSessionMixin, FormView):
     def form_valid(self, form):
         phone = form.cleaned_data['phone']
         self.checkout_session.set_phone(phone)
-        return super(NoMaiView).form_valid(form)
+        return super(NoMaiView, self).form_valid(form)
 
 
 class IndexView(CoreIndexView):
-
     template_name = 'checkout/gateway.html'
     form_class = GatewayForm
     success_url = reverse_lazy('checkout:name_star')
 
 
 class NameStarView(CheckoutSessionMixin, FormView):
-
     template_name = 'checkout/name_star.html'
     success_url = reverse_lazy('checkout:message')
     pre_conditions = ['check_basket_is_not_empty',
@@ -64,7 +61,6 @@ class NameStarView(CheckoutSessionMixin, FormView):
 
 
 class MessageView(CheckoutSessionMixin, FormView):
-
     template_name = 'checkout/message.html'
     success_url = reverse_lazy('checkout:shipping-address')
     pre_conditions = ['check_basket_is_not_empty',
@@ -109,10 +105,9 @@ class MessageView(CheckoutSessionMixin, FormView):
 
 
 class ShippingAddressView(CheckoutSessionMixin, FormView):
-
     template_name = 'checkout/shipping_address.html'
     form_class = AddressForm
-    success_url = reverse_lazy('checkout:payment-method')
+    success_url = reverse_lazy('checkout:payment-details')
     pre_conditions = ['check_basket_is_not_empty',
                       'check_basket_is_valid',
                       ]
@@ -123,6 +118,37 @@ class ShippingAddressView(CheckoutSessionMixin, FormView):
                           'Адрес': self.request.POST['address'], 'Индекс': self.request.POST['postcode'], 'Телефон': self.request.POST['phone'],
                           'Комментарий': self.request.POST['comment']}
         self.checkout_session.set_address(address_fields)
+
+        return super(ShippingAddressView, self).form_valid(form)
+
+
+class PaymentDetailsView(CorePaymentDetailsView):
+    pre_conditions = [
+        'check_basket_is_not_empty',
+        'check_basket_is_valid',
+    ]
+
+    preview = True
+
+    def get_context_data(self, **kwargs):
+        context = super(PaymentDetailsView, self).get_context_data(**kwargs)
+        address = self.checkout_session.get_address()
+        basket = self.request.basket.all_lines()
+        names = self.checkout_session.get_star_names().values()
+        messages = [message.replace('Опубликовать', '').replace('НЕ ПУБЛИКОВАТЬ!', '') for message in list(self.checkout_session.get_messages().values())]
+        total = self.request.basket.total_excl_tax
+        basket_and_names = zip(basket, names, messages)
+        context['name'] = f'{address["Фамилия"]} {address["Имя"]} {address["Отчество"]}'
+        context['address'] = f'{address["Индекс"]}, {address["Адрес"]}'
+        context['phone'] = address['Телефон']
+        context['comment'] = address['Комментарий']
+        context['basket_and_names'] = basket_and_names
+        context['basket'] = basket
+        context['total'] = total
+        return context
+
+    def post(self, request, *args, **kwargs):
+        print('lol')
         lines = []
         for line in self.request.basket.all_lines():
             lines_unit = []
@@ -144,61 +170,44 @@ class ShippingAddressView(CheckoutSessionMixin, FormView):
         address = self.checkout_session.get_address()
         if self.checkout_session.get_phone() is not None:
             template = f''' Заказ без почты!
-            Телефон: {phone} 
-    
-            '''
+                    Телефон: {phone} 
+
+                    '''
         else:
             template = f''' E-mail: {email} 
 
-                        '''
+                                '''
         zipped_template = zip(lines, self.checkout_session.get_star_names().values(), self.checkout_session.get_messages().values())
         for line, star_name, message in zipped_template:
             template += f'''
-            ID звезды: {line[0]} 
-                        
-            Класс: {line[1]}, 
-            
-            Созвездие: {line[2]},
-             
-            Величина: {line[3]}
-                        
-            Цена: {line[4]} 
-                        
-            Имя звезды: {star_name}
-                        
-            Послание :{message}
-            
-                        '''
+                    ID звезды: {line[0]} 
+
+                    Класс: {line[1]}, 
+
+                    Созвездие: {line[2]},
+
+                    Величина: {line[3]}
+
+                    Цена: {line[4]} 
+
+                    Имя звезды: {star_name}
+
+                    Послание :{message}
+
+                                '''
             template += f'''
-            Всего: {total}
-                    
-            Адрес доставки:
-                    '''
+                    Всего: {total}
+
+                    Адрес доставки:
+                            '''
             for key, value in address.items():
-                        template += f'''
-            {key}: {value}
-            '''
+                template += f'''
+                    {key}: {value}
+                    '''
 
         subject = 'Оформлена покупка'
         message = template
         sender = 'no-reply@zvezdavpodarok.ru'
         recipients = ['starmaster@zvezdavpodarok.ru']
         send_mail(subject, message, sender, recipients)
-
-        return super(ShippingAddressView, self).form_valid(form)
-
-
-class PaymentMethodView(CorePaymentMethodView):
-
-    pre_conditions = [
-        'check_basket_is_not_empty',
-        'check_basket_is_valid',
-    ]
-
-
-class PaymentDetailsView(CorePaymentDetailsView):
-
-    pre_conditions = [
-        'check_basket_is_not_empty',
-        'check_basket_is_valid',
-    ]
+        return self.handle_payment_details_submission(request)

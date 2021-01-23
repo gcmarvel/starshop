@@ -1,4 +1,3 @@
-
 from oscar.apps.catalogue.abstract_models import AbstractProduct
 
 from oscar.models.fields import NullCharField
