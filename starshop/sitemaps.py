@@ -1,7 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 from oscar.core.loading import get_model
 
-
 Product = get_model('catalogue', 'Product')
 Category = get_model('catalogue', 'Category')
 
